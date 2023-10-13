@@ -1,0 +1,24 @@
+{
+  "require": {
+    "php": ">=7.0.0",
+    "craftcms/cms": "^3.6.17",
+    "vlucas/phpdotenv": "^2.4.0",
+    "craftcms/redactor": "^2.8.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "modules\\": "modules/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "8.0"
+    }
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ]
+  }
+}
