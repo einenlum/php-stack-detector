@@ -29,11 +29,11 @@ use Einenlum\PhpStackDetector\StackType;
 $detector = Detector::create();
 $stack = $detector->getStack('/path/to/a/symfony/directory');
 
-$stack->type === StackType===SYMFONY;
+$stack->type === StackType::SYMFONY;
 $stack->version; // 5.4
 
 $stack = $detector->getStack('/path/to/an/unknown/symfony/version/directory');
-$stack->type === StackType===SYMFONY;
+$stack->type === StackType::SYMFONY;
 $stack->version; // null
 
 $stack = $detector->getStack('/path/to/an/unknown/stack/directory');
