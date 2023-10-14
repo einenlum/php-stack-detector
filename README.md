@@ -40,6 +40,14 @@ $stack = $detector->getStack('/path/to/an/unknown/stack/directory');
 $stack; // null
 ```
 
+You can also use the CLI to test it.
+
+```
+php bin/detect.php ~/Prog/php/my_project/
+Detected stack: laravel
+Version: 10.19.0
+```
+
 ## Tests
 
 ```
