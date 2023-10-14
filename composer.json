@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Einenlum\\PhpStackDetector\\": "src/"
+            "Einenlum\\PhpStackDetector\\": "lib/"
         }
     },
     "autoload-dev": {
