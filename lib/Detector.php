@@ -48,6 +48,14 @@ class Detector
         ]);
     }
 
+    /**
+     * @param string $baseUri The base URI of the project, e.g.
+     *     /some/path/to/local/project
+     *     or
+     *     symfony/demo for a remote Github repository
+     *     or
+     *     symfony/demo:v1.1 for a remote Github repository with a reference
+     */
     public function getStack(string $baseUri, ?string $subFolder = null): ?Stack
     {
         foreach ($this->stackDetectors as $stackDetector) {
