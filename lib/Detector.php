@@ -6,11 +6,13 @@ namespace Einenlum\PhpStackDetector;
 
 use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
+use Einenlum\PhpStackDetector\DirectoryCrawler\GithubAdapter;
 use Einenlum\PhpStackDetector\StackDetector\CraftCMSDetector;
 use Einenlum\PhpStackDetector\StackDetector\LaravelDetector;
 use Einenlum\PhpStackDetector\StackDetector\StatamicDetector;
 use Einenlum\PhpStackDetector\StackDetector\SymfonyDetector;
 use Einenlum\PhpStackDetector\StackDetector\WordpressDetector;
+use Github\Client;
 
 class Detector
 {
@@ -19,18 +21,30 @@ class Detector
     {
     }
 
+    public static function createForFilesystem(): self
+    {
+        return self::create(new DirectoryCrawler\FilesystemAdapter());
+    }
+
+    public static function createForGithub(Client $client = null): self
+    {
+        $client = $client ?: new \Github\Client();
+        $adapter = new GithubAdapter($client);
+
+        return self::create($adapter);
+    }
+
     public static function create(AdapterInterface $adapter): self
     {
         $composerConfigProvider = new ComposerConfigProvider($adapter);
         $packageVersionProvider = new Composer\PackageVersionProvider($composerConfigProvider);
 
         return new self([
-            // Statamic uses laravel so it must be checked before
-            new StatamicDetector($packageVersionProvider),
             new LaravelDetector($packageVersionProvider),
             new SymfonyDetector($packageVersionProvider),
             new CraftCMSDetector($packageVersionProvider),
             new WordpressDetector($adapter),
+            new StatamicDetector($packageVersionProvider),
         ]);
     }
 

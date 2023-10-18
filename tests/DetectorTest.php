@@ -15,7 +15,7 @@ class DetectorTest extends TestCase
 
     public function setUp(): void
     {
-        $this->sut = Detector::create(new FilesystemAdapter());
+        $this->sut = Detector::createForFilesystem();
     }
 
     /** 

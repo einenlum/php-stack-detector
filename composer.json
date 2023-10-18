@@ -24,7 +24,10 @@
         "phpstan/phpstan": "^1.10"
     },
     "require": {
-        "einenlum/composer-version-parser": "^1.0"
+        "einenlum/composer-version-parser": "^1.0",
+        "knplabs/github-api": "^3.12",
+        "symfony/http-client": "^6.3",
+        "nyholm/psr7": "^1.8"
     },
     "scripts": {
         "unit-test": "phpunit tests",
@@ -33,5 +36,10 @@
             "@unit-test",
             "@static-analysis"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
