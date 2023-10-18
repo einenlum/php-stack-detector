@@ -58,6 +58,8 @@ class Detector
      */
     public function getStack(string $baseUri, ?string $subFolder = null): ?Stack
     {
+        $subFolder = trim($subFolder) === '/' ? null : $subFolder;
+
         foreach ($this->stackDetectors as $stackDetector) {
             $stack = $stackDetector->getStack($baseUri, $subFolder);
 
