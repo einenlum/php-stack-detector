@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector;
 
+use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
+use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\StackDetector\CraftCMSDetector;
 use Einenlum\PhpStackDetector\StackDetector\LaravelDetector;
 use Einenlum\PhpStackDetector\StackDetector\StatamicDetector;
@@ -17,9 +19,10 @@ class Detector
     {
     }
 
-    public static function create(): self
+    public static function create(AdapterInterface $adapter): self
     {
-        $packageVersionProvider = new Composer\PackageVersionProvider();
+        $composerConfigProvider = new ComposerConfigProvider($adapter);
+        $packageVersionProvider = new Composer\PackageVersionProvider($composerConfigProvider);
 
         return new self([
             // Statamic uses laravel so it must be checked before
@@ -27,14 +30,14 @@ class Detector
             new LaravelDetector($packageVersionProvider),
             new SymfonyDetector($packageVersionProvider),
             new CraftCMSDetector($packageVersionProvider),
-            new WordpressDetector(),
+            new WordpressDetector($adapter),
         ]);
     }
 
-    public function getStack(string $folderPath): ?Stack
+    public function getStack(string $baseUri, ?string $subFolder = null): ?Stack
     {
         foreach ($this->stackDetectors as $stackDetector) {
-            $stack = $stackDetector->getStack($folderPath);
+            $stack = $stackDetector->getStack($baseUri, $subFolder);
 
             if ($stack !== null) {
                 return $stack;

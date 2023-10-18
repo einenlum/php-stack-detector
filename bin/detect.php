@@ -3,8 +3,10 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Einenlum\PhpStackDetector\Detector;
+use Einenlum\PhpStackDetector\DirectoryCrawler\FileSystemAdapter;
 
-$detector = Detector::create();
+$filesystemAdapter = new FileSystemAdapter();
+$detector = Detector::create($filesystemAdapter);
 
 $directory = $argv[1] ?? null;
 if (null === $directory || !is_dir($directory)) {

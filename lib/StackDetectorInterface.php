@@ -6,5 +6,5 @@ namespace Einenlum\PhpStackDetector;
 
 interface StackDetectorInterface
 {
-    public function getStack(string $folderPath): ?Stack;
+    public function getStack(string $baseUri, ?string $subDirectory): ?Stack;
 }

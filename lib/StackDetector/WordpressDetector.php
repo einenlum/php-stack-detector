@@ -2,21 +2,45 @@
 
 namespace Einenlum\PhpStackDetector\StackDetector;
 
+use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
+use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 use Einenlum\PhpStackDetector\Stack;
 use Einenlum\PhpStackDetector\StackDetectorInterface;
 use Einenlum\PhpStackDetector\StackType;
 
 class WordpressDetector implements StackDetectorInterface
 {
-    public function getStack(string $folderPath): ?Stack
+    public function __construct(private AdapterInterface $adapter)
     {
-        if (!is_dir($folderPath . '/wp-includes')) {
+    }
+
+    public function getStack(string $baseUri, ?string $subDirectory): ?Stack
+    {
+        if (!$this->adapter->directoryExists($baseUri, $subDirectory)) {
             return null;
         }
 
-        $versionFile = $folderPath . '/wp-includes/version.php';
-        if (is_file($versionFile)) {
-            $version = $this->parseFileAndGetVersion($versionFile);
+        if (!$this->adapter->directoryExists(
+            $baseUri,
+            $subDirectory,
+            'wp-includes'
+        )) {
+            return null;
+        }
+
+        try {
+            $versionFileContent = $this->adapter->getFileContent(
+                $baseUri,
+                $subDirectory,
+                'wp-includes',
+                'version.php'
+            );
+        } catch (ResourceNotFoundException $e) {
+            $versionFileContent = null;
+        }
+
+        if (null !== $versionFileContent) {
+            $version = $this->parseFileAndGetVersion($versionFileContent);
 
             return new Stack(
                 StackType::WORDPRESS,
@@ -24,9 +48,19 @@ class WordpressDetector implements StackDetectorInterface
             );
         }
 
-        $varsFile = $folderPath . '/wp-includes/vars.php';
-        if (is_file($varsFile)) {
-            $version = $this->parseFileAndGetVersion($varsFile);
+        try {
+            $varsFileContent = $this->adapter->getFileContent(
+                $baseUri,
+                $subDirectory,
+                'wp-includes',
+                'vars.php'
+            );
+        } catch (ResourceNotFoundException $e) {
+            $varsFileContent = null;
+        }
+
+        if (null !== $varsFileContent) {
+            $version = $this->parseFileAndGetVersion($varsFileContent);
 
             return new Stack(
                 StackType::WORDPRESS,
@@ -40,14 +74,8 @@ class WordpressDetector implements StackDetectorInterface
         );
     }
 
-    private function parseFileAndGetVersion(string $filePath): ?string
+    private function parseFileAndGetVersion(string $fileContent): ?string
     {
-        $fileContent = file_get_contents($filePath);
-
-        if (false === $fileContent) {
-            return null;
-        }
-
         foreach (explode("\n", $fileContent) as $line) {
             if (mb_strpos($line, '$wp_version') !== false) {
                 if (preg_match('/^\$wp_version\s?=\s?[\'"](.*)[\'"];/', $line, $matches)) {
