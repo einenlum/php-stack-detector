@@ -24,9 +24,14 @@ composer require einenlum/php-stack-detector
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Einenlum\PhpStackDetector\Detector;
+use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
+use Einenlum\PhpStackDetector\Factory\GithubDetectorFactory;
 use Einenlum\PhpStackDetector\StackType;
 
-$detector = Detector::createForFilesystem();
+// Local usage
+
+$factory = new FilesystemDetectorFactory();
+$detector = $factory->create();
 $stack = $detector->getStack('/path/to/a/symfony/directory');
 
 $stack->type === StackType::SYMFONY;
@@ -39,7 +44,11 @@ $stack->version; // null
 $stack = $detector->getStack('/path/to/an/unknown/stack/directory');
 $stack; // null
 
-$detector = Detector::createForGithub();
+// For Github usage
+
+$factory = new GithubDetectorFactory();
+$detector = $factory->create();
+
 $stack = $detector->getStack('symfony/demo');
 
 $stack->type === StackType::SYMFONY;
@@ -48,7 +57,7 @@ $stack->version; // 6.3.0
 // You can also pass an already authenticated Github Client
 $client = new \Github\Client();
 $client->authenticate('some_access_token', null, \Github\AuthMethod::ACCESS_TOKEN);
-$detector = Detector::createForGithub($client);
+$detector = $factory->create();
 
 $stack = $detector->getStack('einenlum/private-repo');
 
@@ -90,6 +99,6 @@ This will use a [ComposerConfigProvider](src/Composer/ComposerConfigProvider.php
 
 All of them use an Adapter, that is for now either [FilesystemAdapter](src/DirectoryCrawler/FilesystemAdapter.php) or [GithubAdapter](src/DirectoryCrawler/GithubAdapter.php)
 
-You can add your own StackDetector and then add it to the `create` method of the [Detector](src/Detector.php).
+You can add your own StackDetector and then add it to the `getStackDetectors` method of the [HasStackDetectors](src/Factory/HasStackDetectors.php) trait.
 
 Any Pull Request welcome!

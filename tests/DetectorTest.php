@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Einenlum\Tests\PhpStackDetector;
 
 use Einenlum\PhpStackDetector\Detector;
-use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
+use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
 use Einenlum\PhpStackDetector\StackType;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,8 @@ class DetectorTest extends TestCase
 
     public function setUp(): void
     {
-        $this->sut = Detector::createForFilesystem();
+        $factory = new FilesystemDetectorFactory();
+        $this->sut = $factory->create();
     }
 
     /** 

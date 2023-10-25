@@ -21,33 +21,6 @@ class Detector
     {
     }
 
-    public static function createForFilesystem(): self
-    {
-        return self::create(new DirectoryCrawler\FilesystemAdapter());
-    }
-
-    public static function createForGithub(Client $client = null): self
-    {
-        $client = $client ?: new \Github\Client();
-        $adapter = new GithubAdapter($client);
-
-        return self::create($adapter);
-    }
-
-    public static function create(AdapterInterface $adapter): self
-    {
-        $composerConfigProvider = new ComposerConfigProvider($adapter);
-        $packageVersionProvider = new Composer\PackageVersionProvider($composerConfigProvider);
-
-        return new self([
-            new LaravelDetector($packageVersionProvider),
-            new SymfonyDetector($packageVersionProvider),
-            new CraftCMSDetector($packageVersionProvider),
-            new WordpressDetector($adapter),
-            new StatamicDetector($packageVersionProvider),
-        ]);
-    }
-
     /**
      * @param string $baseUri The base URI of the project, e.g.
      *     /some/path/to/local/project
@@ -58,7 +31,7 @@ class Detector
      */
     public function getStack(string $baseUri, ?string $subFolder = null): ?Stack
     {
-        $subFolder = trim($subFolder) === '/' ? null : $subFolder;
+        $subFolder = $this->cleanSubFolder($subFolder);
 
         foreach ($this->stackDetectors as $stackDetector) {
             $stack = $stackDetector->getStack($baseUri, $subFolder);
@@ -69,5 +42,14 @@ class Detector
         }
 
         return null;
+    }
+
+    private function cleanSubFolder(?string $subFolder): ?string
+    {
+        if ($subFolder === null) {
+            return null;
+        }
+
+        return trim($subFolder) === '/' ? null : $subFolder;
     }
 }

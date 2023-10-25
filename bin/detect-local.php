@@ -2,9 +2,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Einenlum\PhpStackDetector\Detector;
+use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
 
-$detector = Detector::createForFilesystem();
+$factory = new FilesystemDetectorFactory();
+$detector = $factory->create();
 
 $directory = $argv[1] ?? null;
 if (null === $directory) {

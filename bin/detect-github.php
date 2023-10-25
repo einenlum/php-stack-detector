@@ -3,15 +3,18 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Einenlum\PhpStackDetector\Detector;
+use Einenlum\PhpStackDetector\Factory\GithubDetectorFactory;
 use Github\AuthMethod;
+
+$factory = new GithubDetectorFactory();
 
 $accessToken = getenv('GITHUB_ACCESS_TOKEN');
 if ($accessToken) {
     $client = new \Github\Client();
     $client->authenticate($accessToken, null, AuthMethod::ACCESS_TOKEN);
-    $detector = Detector::createForGithub($client);
+    $detector = $factory->create($client);
 } else {
-    $detector = Detector::createForGithub();
+    $detector = $factory->create();
 }
 
 $directory = $argv[1] ?? null;
