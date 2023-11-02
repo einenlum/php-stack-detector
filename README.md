@@ -85,6 +85,32 @@ Detected stack: laravel
 Version: 10.19.0
 ```
 
+### Usage with Symfony
+
+Declare the factory and the detector in your `services.yaml` file.
+
+For Github:
+
+```yaml
+services:
+    Einenlum\PhpStackDetector\Factory\GithubDetectorFactory: ~
+
+    Einenlum\PhpStackDetector\Detector:
+        factory: ['@Einenlum\PhpStackDetector\Factory\GithubDetectorFactory', 'create']
+        arguments:
+            $client: '@Github\Client'
+```
+
+For local filesystem:
+
+```yaml
+services:
+    Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory: ~
+
+    Einenlum\PhpStackDetector\Detector:
+        factory: ['@Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory', 'create']
+```
+
 ## Tests
 
 ```
