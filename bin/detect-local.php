@@ -2,17 +2,20 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Einenlum\PhpStackDetector\Detector;
+use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
 
-$detector = Detector::create();
+$factory = new FilesystemDetectorFactory();
+$detector = $factory->create();
 
 $directory = $argv[1] ?? null;
-if (null === $directory || !is_dir($directory)) {
+if (null === $directory) {
     echo 'Please provide a directory to scan' . "\n";
     exit(1);
 }
 
-$stack = $detector->getStack($directory);
+$subDirectory = $argv[2] ?? null;
+
+$stack = $detector->getStack($directory, $subDirectory);
 
 if (null === $stack) {
     echo 'No stack detected' . "\n";

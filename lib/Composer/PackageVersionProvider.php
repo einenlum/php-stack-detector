@@ -4,21 +4,30 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Composer;
 
-use Einenlum\ComposerVersionParser\Parser;
+use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 
 class PackageVersionProvider
 {
+    public function __construct(private ComposerConfigProvider $configProvider)
+    {
+    }
+
     /**
      * @param string ...$packageNames A list of packages to check in that order
      */
     public function getVersionForPackage(
-        string $folderPath,
+        string $baseUri,
+        ?string $subDirectory,
         string ...$packageNames
     ): ?PackageVersion {
-        $lock = $this->getComposerLockConfig($folderPath);
-        if (null !== $lock) {
+        $config = $this->configProvider->getComposerConfig($baseUri, $subDirectory);
+        if (null === $config) {
+            return null;
+        }
+
+        if ($config->type === ComposerConfigType::LOCK) {
             foreach ($packageNames as $packageName) {
-                foreach ($lock['packages'] as $package) {
+                foreach ($config->content['packages'] as $package) {
                     if ($package['name'] === $packageName) {
                         return new PackageVersion(
                             null,
@@ -31,13 +40,8 @@ class PackageVersionProvider
             return null;
         }
 
-        $config = $this->getComposerConfig($folderPath);
-        if (null === $config) {
-            return null;
-        }
-
         foreach ($packageNames as $name) {
-            foreach ($config['require'] as $packageName => $requirement) {
+            foreach ($config->content['require'] as $packageName => $requirement) {
                 if ($packageName === $name) {
                     return new PackageVersion(
                         $requirement,
@@ -48,47 +52,5 @@ class PackageVersionProvider
         }
 
         return null;
-    }
-
-    /** @return null|array<string, mixed> */
-    private function getComposerConfig(string $folderPath): ?array
-    {
-        return $this->getFile($folderPath, 'composer.json');
-    }
-
-    /** @return null|array<string, mixed> */
-    private function getComposerLockConfig(string $folderPath): ?array
-    {
-        return $this->getFile($folderPath, 'composer.lock');
-    }
-
-    /** @return array<string, mixed>|null */
-    private function getFile(string $folderPath, string $filename): ?array
-    {
-        if (!is_dir($folderPath)) {
-            return null;
-        }
-
-        $path = $folderPath . '/' . $filename;
-        if (!is_file($path)) {
-            return null;
-        }
-
-        /** @var string $content */
-        $content = file_get_contents($path);
-
-        try {
-            /** @var array<string, mixed> $composerConfig */
-            $composerConfig = json_decode(
-                $content,
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-        } catch (\JsonException) {
-            return null;
-        }
-
-        return $composerConfig;
     }
 }

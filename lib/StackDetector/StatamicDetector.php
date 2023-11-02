@@ -15,10 +15,11 @@ class StatamicDetector implements StackDetectorInterface
     {
     }
 
-    public function getStack(string $folderPath): ?Stack
+    public function getStack(string $baseUri, ?string $subDirectory): ?Stack
     {
         $version = $this->packageVersionProvider->getVersionForPackage(
-            $folderPath,
+            $baseUri,
+            $subDirectory,
             'statamic/cms',
         );
 
