@@ -8,7 +8,7 @@ use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 
 class PackageVersionProvider
 {
-    public function __construct(private ComposerConfigProvider $configProvider)
+    public function __construct(private readonly ComposerConfigProvider $configProvider)
     {
     }
 

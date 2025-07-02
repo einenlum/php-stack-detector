@@ -57,9 +57,12 @@ $stack->version; // 6.3.0
 // You can also pass an already authenticated Github Client
 $client = new \Github\Client();
 $client->authenticate('some_access_token', null, \Github\AuthMethod::ACCESS_TOKEN);
-$detector = $factory->create();
+$detector = $factory->create($client);
 
 $stack = $detector->getStack('einenlum/private-repo');
+
+// optionally: detect the stack on a specific branch 
+$stack = $detector->getStack('einenlum/private-repo:branch-name');
 
 $stack->type === StackType::SYMFONY;
 $stack->version; // 6.3.0

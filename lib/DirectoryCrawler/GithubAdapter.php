@@ -14,7 +14,7 @@ class GithubAdapter implements AdapterInterface
      * If you need to check private repositories, the client should aleady
      * be authenticated.
      */
-    public function __construct(private Client $client)
+    public function __construct(private readonly Client $client)
     {
     }
 

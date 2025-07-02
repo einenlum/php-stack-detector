@@ -11,7 +11,7 @@ use Einenlum\PhpStackDetector\StackType;
 
 class CraftCMSDetector implements StackDetectorInterface
 {
-    public function __construct(private PackageVersionProvider $packageVersionProvider)
+    public function __construct(private readonly PackageVersionProvider $packageVersionProvider)
     {
     }
 
