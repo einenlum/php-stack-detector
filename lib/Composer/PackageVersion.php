@@ -9,8 +9,8 @@ use Einenlum\ComposerVersionParser\Parser;
 class PackageVersion
 {
     public function __construct(
-        private ?string $requirement,
-        private ?string $version
+        private readonly ?string $requirement,
+        private readonly ?string $version
     ) {
     }
 

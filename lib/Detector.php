@@ -17,7 +17,7 @@ use Github\Client;
 class Detector
 {
     /** @param StackDetectorInterface[] $stackDetectors */
-    public function __construct(private array $stackDetectors)
+    public function __construct(private readonly array $stackDetectors)
     {
     }
 

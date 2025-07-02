@@ -12,7 +12,7 @@ use Einenlum\PhpStackDetector\StackType;
 
 class LaravelDetector implements StackDetectorInterface
 {
-    public function __construct(private PackageVersionProvider $packageVersionProvider)
+    public function __construct(private readonly PackageVersionProvider $packageVersionProvider)
     {
     }
 

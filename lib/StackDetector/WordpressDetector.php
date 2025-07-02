@@ -10,7 +10,7 @@ use Einenlum\PhpStackDetector\StackType;
 
 class WordpressDetector implements StackDetectorInterface
 {
-    public function __construct(private AdapterInterface $adapter)
+    public function __construct(private readonly AdapterInterface $adapter)
     {
     }
 

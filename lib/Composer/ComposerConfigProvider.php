@@ -14,7 +14,7 @@ class ComposerConfigProvider
     private array $cache = [];
 
     public function __construct(
-        private AdapterInterface $adapter
+        private readonly AdapterInterface $adapter
     ) {
     }
 
