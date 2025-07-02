@@ -61,6 +61,9 @@ $detector = $factory->create($client);
 
 $stack = $detector->getStack('einenlum/private-repo');
 
+// optionally: detect the stack on a specific branch 
+$stack = $detector->getStack('einenlum/private-repo:branch-name');
+
 $stack->type === StackType::SYMFONY;
 $stack->version; // 6.3.0
 ```
