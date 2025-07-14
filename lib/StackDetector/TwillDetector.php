@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Einenlum\PhpStackDetector\StackDetector;
+
+use Einenlum\PhpStackDetector\StackDetectorInterface;
+use Einenlum\PhpStackDetector\StackType;
+
+class TwillDetector extends BaseComposerTypeDetector implements StackDetectorInterface
+{
+    public const string PACKAGE_NAME = 'area17/twill';
+
+    protected function packagesToSearch(): array
+    {
+        return [self::PACKAGE_NAME];
+    }
+
+    protected function detectedStackType(): StackType
+    {
+        return StackType::TWILL;
+    }
+}

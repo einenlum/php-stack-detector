@@ -120,6 +120,12 @@ services:
 composer run test
 ```
 
+## Run interactive shell with docker
+
+```shell
+docker run --rm -it -v "$PWD":/app -w /app  php:8.4-cli bash
+```
+
 ## Contribute
 
 Each stack has its own Detector implementing a [StackDetectorInterface](src/StackDetectorInterface.php).

@@ -12,9 +12,9 @@ class GithubDetectorFactory
 {
     use HasStackDetectors;
 
-    public function create(Client $client = null): Detector
+    public function create(?Client $client = null): Detector
     {
-        $client = $client ?: new \Github\Client();
+        $client = $client ?: new Client();
         $adapter = new GithubAdapter($client);
 
         $stackDetectors = $this->getStackDetectors($adapter);
