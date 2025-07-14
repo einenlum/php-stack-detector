@@ -4,43 +4,35 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\StackDetector;
 
-use Einenlum\PhpStackDetector\Composer\PackageVersionProvider;
 use Einenlum\PhpStackDetector\DependencyTree;
 use Einenlum\PhpStackDetector\Stack;
 use Einenlum\PhpStackDetector\StackDetectorInterface;
 use Einenlum\PhpStackDetector\StackType;
 
-class LaravelDetector implements StackDetectorInterface
+class LaravelDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {
-    public function __construct(private readonly PackageVersionProvider $packageVersionProvider)
+    protected function packagesToSearch(): array
     {
+        return ['laravel/framework'];
+    }
+
+    protected function detectedStackType(): StackType
+    {
+        return StackType::LARAVEL;
     }
 
     public function getStack(string $baseUri, ?string $subDirectory): ?Stack
     {
-        foreach (DependencyTree::skipIfThesePackagesArePresent('laravel/framework') as $packageName) {
+        foreach (DependencyTree::getChildStacksForPackage('laravel/framework') as $packageName) {
             if (null !== $this->packageVersionProvider->getVersionForPackage(
                 $baseUri,
                 $subDirectory,
-                $packageName,
+                [$packageName],
             )) {
                 return null;
             }
         }
 
-        $version = $this->packageVersionProvider->getVersionForPackage(
-            $baseUri,
-            $subDirectory,
-            'laravel/framework',
-        );
-
-        if (null === $version) {
-            return null;
-        }
-
-        return new Stack(
-            StackType::LARAVEL,
-            $version->getVersion(),
-        );
+        return parent::getStack($baseUri, $subDirectory);
     }
 }

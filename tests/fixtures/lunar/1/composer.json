@@ -1,0 +1,19 @@
+{
+  "name": "lunar/demo",
+  "type": "project",
+  "require": {
+    "lunarphp/lunar": "^1.0"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Lunar\\Demo\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "fortrabbit"
+    }
+  ],
+  "minimum-stability": "dev"
+}

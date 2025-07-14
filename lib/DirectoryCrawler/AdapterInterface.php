@@ -13,6 +13,6 @@ interface AdapterInterface
 
     public function directoryExists(string $baseUri, ?string ...$pathTree): bool;
 
-    /** @return array<int, null|string> */
+    /** @return array<int, string|null> */
     public function listFilesInDirectory(string $baseUri, ?string ...$pathTree): array;
 }

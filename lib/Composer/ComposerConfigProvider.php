@@ -14,7 +14,7 @@ class ComposerConfigProvider
     private array $cache = [];
 
     public function __construct(
-        private readonly AdapterInterface $adapter
+        private readonly AdapterInterface $adapter,
     ) {
     }
 
@@ -93,7 +93,7 @@ class ComposerConfigProvider
     private function setToCache(
         string $baseUri,
         ?string $subDirectory,
-        ?ComposerConfig $config
+        ?ComposerConfig $config,
     ): void {
         $cacheKey = $this->getCacheKey($baseUri, $subDirectory);
 
@@ -116,6 +116,6 @@ class ComposerConfigProvider
 
     private function getCacheKey(string $baseUri, ?string $subDirectory): string
     {
-        return $baseUri . $subDirectory;
+        return $baseUri.$subDirectory;
     }
 }

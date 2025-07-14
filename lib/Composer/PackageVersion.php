@@ -6,18 +6,18 @@ namespace Einenlum\PhpStackDetector\Composer;
 
 use Einenlum\ComposerVersionParser\Parser;
 
-class PackageVersion
+readonly class PackageVersion
 {
     public function __construct(
-        private readonly ?string $requirement,
-        private readonly ?string $version
+        private ?string $requirement,
+        private ?string $version,
     ) {
     }
 
     public function getVersion(): ?string
     {
-        if ($this->version !== null) {
-            if (mb_strpos($this->version, 'v') === 0) {
+        if (null !== $this->version) {
+            if (0 === mb_strpos($this->version, 'v')) {
                 return mb_substr($this->version, 1);
             }
 
@@ -26,8 +26,11 @@ class PackageVersion
 
         /** @var string $requirement */
         $requirement = $this->requirement;
-        $parser = new Parser();
 
-        return $parser->parse($requirement);
+        if (str_starts_with($requirement, '~v')) {
+            $requirement =  mb_substr($requirement, 2);
+        }
+
+        return new Parser()->parse($requirement);
     }
 }

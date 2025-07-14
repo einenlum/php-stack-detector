@@ -4,32 +4,18 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\StackDetector;
 
-use Einenlum\PhpStackDetector\Composer\PackageVersionProvider;
-use Einenlum\PhpStackDetector\Stack;
 use Einenlum\PhpStackDetector\StackDetectorInterface;
 use Einenlum\PhpStackDetector\StackType;
 
-class CraftCMSDetector implements StackDetectorInterface
+class CraftCMSDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {
-    public function __construct(private readonly PackageVersionProvider $packageVersionProvider)
+    protected function packagesToSearch(): array
     {
+        return ['craftcms/cms'];
     }
 
-    public function getStack(string $baseUri, ?string $subDirectory): ?Stack
+    protected function detectedStackType(): StackType
     {
-        $version = $this->packageVersionProvider->getVersionForPackage(
-            $baseUri,
-            $subDirectory,
-            'craftcms/cms',
-        );
-
-        if (null === $version) {
-            return null;
-        }
-
-        return new Stack(
-            StackType::CRAFT_CMS,
-            $version->getVersion(),
-        );
+        return StackType::CRAFT_CMS;
     }
 }

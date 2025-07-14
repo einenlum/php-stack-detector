@@ -8,7 +8,6 @@ use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 
 class FilesystemAdapter implements AdapterInterface
 {
-    /** {@inheritdoc} */
     public function getFileContent(string $baseUri, ?string ...$pathTree): string
     {
         $fullUri = $this->getFullUri($baseUri, $pathTree);
@@ -31,7 +30,6 @@ class FilesystemAdapter implements AdapterInterface
         return is_dir($fullUri);
     }
 
-    /** {@inheritdoc} */
     public function listFilesInDirectory(string $baseUri, ?string ...$pathTree): array
     {
         if (!$this->directoryExists($baseUri, ...$pathTree)) {
@@ -46,7 +44,7 @@ class FilesystemAdapter implements AdapterInterface
         return array_values(array_diff($files, ['..', '.']));
     }
 
-    /** @param (null|string)[] $pathTree */
+    /** @param (string|null)[] $pathTree */
     private function getFullUri(string $baseUri, array $pathTree): string
     {
         $pathTree = array_filter($pathTree);

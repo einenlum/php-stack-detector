@@ -1,0 +1,69 @@
+{
+  "name": "leafs/api",
+  "description": "A lightweight PHP MVC framework for rapid API development.",
+  "type": "library",
+  "keywords": [
+    "framework",
+    "leaf",
+    "leafPHP",
+    "mvc",
+    "leaf api",
+    "api"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michael Darko",
+      "email": "mickdd22@gmail.com",
+      "homepage": "https://mychi.netlify.app",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "leafs/aloe": "*",
+    "illuminate/console": "^8.75",
+    "leafs/blade": "*",
+    "leafs/mvc-core": "*",
+    "leafs/leaf": "^3.2",
+    "leafs/logger": "*",
+    "leafs/cors": "*",
+    "leafs/auth": "*",
+    "leafs/db": "*"
+  },
+  "require-dev": {
+    "fakerphp/faker": "^1.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lib\\": "lib/",
+      "App\\": "app/",
+      "Config\\": "config/",
+      "App\\Http\\": "app/http/",
+      "App\\Jobs\\": "app/jobs/",
+      "App\\Views\\": "app/views/",
+      "App\\Utils\\": "app/utils/",
+      "App\\Models\\": "app/models/",
+      "App\\Workers\\": "app/workers/",
+      "App\\Console\\": "app/console/",
+      "App\\Scripts\\": "app/scripts/",
+      "App\\Helpers\\": "app/helpers/",
+      "App\\Services\\": "app/services/",
+      "App\\Controllers\\": "app/controllers/",
+      "App\\Database\\Seeds\\": "app/database/seeds/",
+      "App\\Database\\Schema\\": "app/database/schema/",
+      "App\\Database\\Factories\\": "app/database/factories/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": false
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+      "@php -r \"unlink('README.MD'); rename('README2.MD', 'README.MD');\""
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

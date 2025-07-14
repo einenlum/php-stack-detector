@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\Tests\PhpStackDetector\DirectoryCrawler;
+namespace Einenlum\Tests\PhpStackDetector\Unit\DirectoryCrawler;
 
 use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +17,7 @@ class FilesystemAdapterTest extends TestCase
     }
 
     /** @test */
-    public function get_file_content(): void
+    public function getFileContent(): void
     {
         $content = $this->sut->getFileContent(__DIR__, 'FilesystemAdapterTest.php');
 
@@ -25,13 +25,13 @@ class FilesystemAdapterTest extends TestCase
     }
 
     /** @test */
-    public function it_says_if_a_directory_exists(): void
+    public function itSaysIfADirectoryExists(): void
     {
         $this->assertTrue($this->sut->directoryExists(__DIR__));
     }
 
     /** @test */
-    public function it_says_if_a_directory_does_not_exist(): void
+    public function itSaysIfADirectoryDoesNotExist(): void
     {
         $this->assertFalse($this->sut->directoryExists(
             __DIR__,
@@ -42,11 +42,11 @@ class FilesystemAdapterTest extends TestCase
     }
 
     /** @test */
-    public function it_list_files_in_a_directory(): void
+    public function itListFilesInADirectory(): void
     {
         $files = $this->sut->listFilesInDirectory(
             __DIR__,
-            '..',
+            '../..',
             'fixtures',
             'composer-lock'
         );
