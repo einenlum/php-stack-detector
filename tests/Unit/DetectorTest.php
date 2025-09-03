@@ -43,6 +43,7 @@ class DetectorTest extends TestCase
             'Symfony 6' => ['symfony/6', '6.3', StackType::SYMFONY],
             'Symfony unknown version' => ['symfony/unknown', null, StackType::SYMFONY],
 
+            'Laravel *' => ['laravel/star', null, StackType::LARAVEL],
             'Laravel 5' => ['laravel/5', '5.2', StackType::LARAVEL],
             'Laravel 6' => ['laravel/6', '6', StackType::LARAVEL],
             'Laravel 7' => ['laravel/7', '7', StackType::LARAVEL],
