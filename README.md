@@ -32,7 +32,13 @@ use Einenlum\PhpStackDetector\StackType;
 
 $factory = new FilesystemDetectorFactory();
 $detector = $factory->create();
-$stack = $detector->getStack('/path/to/a/symfony/directory');
+$config = $detector->getFullConfiguration('/path/to/a/symfony/directory');
+
+$phpConfiguration = $config->phpConfiguration;
+$phpConfiguration->phpVersion->version; // 8.3
+$phpConfiguration->requiredExtensions; // ['intl', 'curl']
+
+$stack = $config->stack;
 
 $stack->type === StackType::SYMFONY;
 $stack->version; // 5.4
@@ -49,7 +55,13 @@ $stack; // null
 $factory = new GithubDetectorFactory();
 $detector = $factory->create();
 
-$stack = $detector->getStack('symfony/demo');
+$config = $detector->getFullConfiguration('/path/to/a/symfony/directory');
+
+$phpConfiguration = $config->phpConfiguration;
+$phpConfiguration->phpVersion->version; // 8.3
+$phpConfiguration->requiredExtensions; // ['intl', 'curl']
+
+$stack = $config->stack;
 
 $stack->type === StackType::SYMFONY;
 $stack->version; // 6.3.0
@@ -59,13 +71,10 @@ $client = new \Github\Client();
 $client->authenticate('some_access_token', null, \Github\AuthMethod::ACCESS_TOKEN);
 $detector = $factory->create($client);
 
-$stack = $detector->getStack('einenlum/private-repo');
+$config = $detector->getFullConfiguration('einenlum/private-repo');
 
 // optionally: detect the stack on a specific branch 
-$stack = $detector->getStack('einenlum/private-repo:branch-name');
-
-$stack->type === StackType::SYMFONY;
-$stack->version; // 6.3.0
+$config = $detector->getFullConfiguration('einenlum/private-repo:branch-name');
 ```
 
 You can also use the CLI to test it.

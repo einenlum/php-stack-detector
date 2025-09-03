@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Factory;
 
+use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
+use Einenlum\PhpStackDetector\PhpConfigurationDetector;
 
 class FilesystemDetectorFactory
 {
@@ -13,8 +15,12 @@ class FilesystemDetectorFactory
 
     public function create(): Detector
     {
-        $stackDetectors = $this->getStackDetectors(new FilesystemAdapter());
+        $adapter = new FilesystemAdapter();
+        $composerConfigProvider = new ComposerConfigProvider($adapter);
 
-        return new Detector($stackDetectors);
+        $phpConfigurationDetector = new PhpConfigurationDetector($composerConfigProvider);
+        $stackDetectors = $this->getStackDetectors($composerConfigProvider, $adapter);
+
+        return new Detector($phpConfigurationDetector, $stackDetectors);
     }
 }

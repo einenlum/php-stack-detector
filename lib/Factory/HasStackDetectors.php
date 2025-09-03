@@ -30,8 +30,10 @@ use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 trait HasStackDetectors
 {
     /** @return StackDetectorInterface[] */
-    private function getStackDetectors(AdapterInterface $adapter): array
-    {
+    private function getStackDetectors(
+        ComposerConfigProvider $composerConfigProvider,
+        AdapterInterface $adapter,
+    ): array {
         $composerConfigProvider = new ComposerConfigProvider($adapter);
         $packageVersionProvider = new PackageVersionProvider($composerConfigProvider);
 

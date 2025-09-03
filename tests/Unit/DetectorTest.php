@@ -26,11 +26,67 @@ class DetectorTest extends TestCase
      */
     public function it_detects_stack(string $fixtureFolder, ?string $expectedVersion, StackType $expectedType): void
     {
-        $stack = $this->sut->getStack(sprintf('%s/../fixtures/%s', __DIR__, $fixtureFolder));
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, $fixtureFolder)
+        );
 
+        $this->assertNotNull($fullConfig);
+
+        $stack = $fullConfig->stack;
         $this->assertNotNull($stack);
         $this->assertSame($expectedType, $stack->type);
         $this->assertSame($expectedVersion, $stack->version);
+    }
+
+    /** @test */
+    public function it_detects_config_platform_php_version()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/platform-config')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertSame('8.4.3', $fullConfig->phpConfiguration->phpVersion->version);
+    }
+
+    /** @test */
+    public function it_detects_no_php_version_if_config_platform_is_not_present()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/no-platform-config')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertSame(null, $fullConfig->phpConfiguration->phpVersion?->version);
+    }
+
+    /** @test */
+    public function it_detects_extensions_if_in_require()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/php-extensions')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertSame(
+            ['json', 'mbstring', 'curl'],
+            $fullConfig->phpConfiguration->requiredExtensions
+        );
+    }
+
+    /** @test */
+    public function it_detects_no_extension_if_not_in_require()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/no-platform-config')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertSame([], $fullConfig->phpConfiguration->requiredExtensions);
     }
 
     public static function packagesDataProvider(): array

@@ -1,0 +1,7 @@
+{
+    "require": {
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-curl": "*"
+    }
+}

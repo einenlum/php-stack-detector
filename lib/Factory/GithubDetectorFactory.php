@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Factory;
 
+use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\DirectoryCrawler\GithubAdapter;
+use Einenlum\PhpStackDetector\PhpConfigurationDetector;
 use Github\Client;
 
 class GithubDetectorFactory
@@ -16,9 +18,11 @@ class GithubDetectorFactory
     {
         $client = $client ?: new Client();
         $adapter = new GithubAdapter($client);
+        $composerConfigProvider = new ComposerConfigProvider($adapter);
+        $phpConfigurationDetector = new PhpConfigurationDetector($composerConfigProvider);
 
-        $stackDetectors = $this->getStackDetectors($adapter);
+        $stackDetectors = $this->getStackDetectors($composerConfigProvider, $adapter);
 
-        return new Detector($stackDetectors);
+        return new Detector($phpConfigurationDetector, $stackDetectors);
     }
 }

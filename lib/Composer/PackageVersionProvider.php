@@ -45,6 +45,10 @@ readonly class PackageVersionProvider
             $subDirectory
         );
 
+        if (null === $config || !isset($config->content['require'])) {
+            return null;
+        }
+
         foreach ($packageNames as $name) {
             foreach ($config->content['require'] as $packageName => $requirement) {
                 if ($packageName === $name) {
