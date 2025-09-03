@@ -23,19 +23,21 @@ abstract class BaseComposerTypeDetector
 
     public function getStack(string $baseUri, ?string $subDirectory): ?Stack
     {
+        $detectedStackType = $this->detectedStackType();
+
+        if (null === $detectedStackType) {
+            return null;
+        }
+
         $version = $this->packageVersionProvider->getVersionForPackage(
             $baseUri,
             $subDirectory,
             $this->packagesToSearch()
         );
 
-        if (null === $version) {
-            return null;
-        }
-
         return new Stack(
             $this->detectedStackType(),
-            $version->getVersion(),
+            $version?->getVersion(),
         );
     }
 }
