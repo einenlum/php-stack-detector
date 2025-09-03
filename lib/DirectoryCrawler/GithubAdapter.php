@@ -8,10 +8,10 @@ use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 use Github\Client;
 use Github\Exception\RuntimeException;
 
-class GithubAdapter implements AdapterInterface
+readonly class GithubAdapter implements AdapterInterface
 {
     /*
-     * If you need to check private repositories, the client should aleady
+     * If you need to check private repositories, the client should already
      * be authenticated.
      */
     public function __construct(private Client $client)
@@ -91,7 +91,6 @@ class GithubAdapter implements AdapterInterface
         );
     }
 
-
     /**
      * @return array{organization: string, repository: string, reference: ?string}
      */
@@ -113,7 +112,7 @@ class GithubAdapter implements AdapterInterface
         ];
     }
 
-    /** @param (null|string)[] $pathTree */
+    /** @param (string|null)[] $pathTree */
     private function getPathTreeAsString(array $pathTree): string
     {
         $paths = array_filter($pathTree);

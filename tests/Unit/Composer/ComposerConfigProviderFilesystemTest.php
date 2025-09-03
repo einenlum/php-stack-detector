@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\Tests\PhpStackDetector\Composer;
+namespace Einenlum\Tests\PhpStackDetector\Unit\Composer;
 
 use Einenlum\PhpStackDetector\Composer\ComposerConfig;
 use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
@@ -10,9 +10,8 @@ use Einenlum\PhpStackDetector\Composer\ComposerConfigType;
 use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
 
-
 /**
- * Tests composer config provider on filesystem
+ * Tests composer config provider on filesystem.
  */
 class ComposerConfigProviderFilesystemTest extends TestCase
 {
@@ -29,7 +28,7 @@ class ComposerConfigProviderFilesystemTest extends TestCase
     {
         $config = $this->sut->getComposerConfig(
             __DIR__,
-            '../fixtures/composer-lock',
+            '../../fixtures/composer-lock',
         );
 
         $this->assertInstanceOf(ComposerConfig::class, $config);
@@ -45,7 +44,7 @@ class ComposerConfigProviderFilesystemTest extends TestCase
     {
         $config = $this->sut->getComposerConfig(
             __DIR__,
-            '../fixtures/composer-json',
+            '../../fixtures/composer-json',
         );
 
         $this->assertInstanceOf(ComposerConfig::class, $config);

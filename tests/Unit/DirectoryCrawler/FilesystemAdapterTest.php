@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\Tests\PhpStackDetector\DirectoryCrawler;
+namespace Einenlum\Tests\PhpStackDetector\Unit\DirectoryCrawler;
 
 use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +11,7 @@ class FilesystemAdapterTest extends TestCase
 {
     private FilesystemAdapter $sut;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->sut = new FilesystemAdapter();
     }
@@ -42,11 +42,11 @@ class FilesystemAdapterTest extends TestCase
     }
 
     /** @test */
-    public function it_list_files_in_a_directory(): void
+    public function it_lists_files_in_a_directory(): void
     {
         $files = $this->sut->listFilesInDirectory(
             __DIR__,
-            '..',
+            '../..',
             'fixtures',
             'composer-lock'
         );

@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Composer;
 
-use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-
-class PackageVersionProvider
+readonly class PackageVersionProvider
 {
     public function __construct(private ComposerConfigProvider $configProvider)
     {
     }
 
     /**
-     * @param string ...$packageNames A list of packages to check in that order
+     * @param string[] $packageNames A list of packages to check in that order
      */
     public function getVersionForPackage(
         string $baseUri,
         ?string $subDirectory,
-        string ...$packageNames
+        array $packageNames,
     ): ?PackageVersion {
         $config = $this->configProvider->getComposerConfig($baseUri, $subDirectory);
         if (null === $config) {
             return null;
         }
 
-        if ($config->type === ComposerConfigType::LOCK) {
+        if (ComposerConfigType::LOCK === $config->type) {
             foreach ($packageNames as $packageName) {
                 foreach ($config->content['packages'] as $package) {
                     if ($package['name'] === $packageName) {

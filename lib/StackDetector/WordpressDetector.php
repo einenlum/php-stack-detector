@@ -10,7 +10,7 @@ use Einenlum\PhpStackDetector\StackType;
 
 class WordpressDetector implements StackDetectorInterface
 {
-    public function __construct(private AdapterInterface $adapter)
+    public function __construct(private readonly AdapterInterface $adapter)
     {
     }
 
@@ -77,7 +77,7 @@ class WordpressDetector implements StackDetectorInterface
     private function parseFileAndGetVersion(string $fileContent): ?string
     {
         foreach (explode("\n", $fileContent) as $line) {
-            if (mb_strpos($line, '$wp_version') !== false) {
+            if (false !== mb_strpos($line, '$wp_version')) {
                 if (preg_match('/^\$wp_version\s?=\s?[\'"](.*)[\'"];/', $line, $matches)) {
                     return $matches[1];
                 }

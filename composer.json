@@ -21,20 +21,25 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^10.4",
-        "phpstan/phpstan": "^1.10"
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.82"
     },
     "require": {
+        "php": "^8.4",
         "einenlum/composer-version-parser": "^1.0",
         "knplabs/github-api": "^3.12",
-        "symfony/http-client": "^6.3",
+        "symfony/http-client": "^7.0",
         "nyholm/psr7": "^1.8"
     },
     "scripts": {
         "unit-test": "phpunit tests",
         "static-analysis": "phpstan",
+        "test-cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff -v",
+        "fix-cs": "./vendor/bin/php-cs-fixer fix --diff -v",
         "test": [
-            "@unit-test",
-            "@static-analysis"
+            "@test-cs",
+            "@static-analysis",
+            "@unit-test"
         ]
     },
     "config": {

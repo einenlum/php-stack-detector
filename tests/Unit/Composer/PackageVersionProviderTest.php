@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\Tests\PhpStackDetector\Composer;
+namespace Einenlum\Tests\PhpStackDetector\Unit\Composer;
 
 use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
 use Einenlum\PhpStackDetector\Composer\PackageVersionProvider;
@@ -25,8 +25,8 @@ class PackageVersionProviderTest extends TestCase
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-lock',
-            'symfony/framework-bundle'
+            '/../../fixtures/composer-lock',
+            ['symfony/framework-bundle']
         );
 
         $this->assertSame('6.3.5', $version->getVersion());
@@ -37,18 +37,16 @@ class PackageVersionProviderTest extends TestCase
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-lock',
-            'someframework/foo',
-            'symfony/framework-bundle',
+            '/../../fixtures/composer-lock',
+            ['someframework/foo', 'symfony/framework-bundle']
         );
 
         $this->assertSame('2.4.1', $version->getVersion());
 
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-lock',
-            'symfony/framework-bundle',
-            'someframework/foo',
+            '/../../fixtures/composer-lock',
+            ['symfony/framework-bundle', 'someframework/foo']
         );
 
         $this->assertSame('6.3.5', $version->getVersion());
@@ -59,18 +57,16 @@ class PackageVersionProviderTest extends TestCase
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-json',
-            'someframework/foo',
-            'symfony/framework-bundle',
+            '/../../fixtures/composer-json',
+            ['someframework/foo', 'symfony/framework-bundle']
         );
 
         $this->assertSame('2.4', $version->getVersion());
 
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-json',
-            'symfony/framework-bundle',
-            'someframework/foo',
+            '/../../fixtures/composer-json',
+            ['symfony/framework-bundle', 'someframework/foo']
         );
 
         $this->assertSame('6.3', $version->getVersion());
@@ -81,8 +77,8 @@ class PackageVersionProviderTest extends TestCase
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-json',
-            'symfony/framework-bundle'
+            '/../../fixtures/composer-json',
+            ['symfony/framework-bundle']
         );
 
         $this->assertSame('6.3', $version->getVersion());
@@ -93,8 +89,8 @@ class PackageVersionProviderTest extends TestCase
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-lock',
-            'lorem/ipsum'
+            '/../../fixtures/composer-lock',
+            ['lorem/ipsum']
         );
 
         $this->assertSame(null, $version);
@@ -105,8 +101,8 @@ class PackageVersionProviderTest extends TestCase
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
-            '/../fixtures/composer-json',
-            'lorem/ipsum'
+            '/../../fixtures/composer-json',
+            ['lorem/ipsum']
         );
 
         $this->assertSame(null, $version);

@@ -4,17 +4,7 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector;
 
-use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
-use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-use Einenlum\PhpStackDetector\DirectoryCrawler\GithubAdapter;
-use Einenlum\PhpStackDetector\StackDetector\CraftCMSDetector;
-use Einenlum\PhpStackDetector\StackDetector\LaravelDetector;
-use Einenlum\PhpStackDetector\StackDetector\StatamicDetector;
-use Einenlum\PhpStackDetector\StackDetector\SymfonyDetector;
-use Einenlum\PhpStackDetector\StackDetector\WordpressDetector;
-use Github\Client;
-
-class Detector
+readonly class Detector
 {
     /** @param StackDetectorInterface[] $stackDetectors */
     public function __construct(private array $stackDetectors)
@@ -23,11 +13,11 @@ class Detector
 
     /**
      * @param string $baseUri The base URI of the project, e.g.
-     *     /some/path/to/local/project
-     *     or
-     *     symfony/demo for a remote Github repository
-     *     or
-     *     symfony/demo:v1.1 for a remote Github repository with a reference
+     *                        /some/path/to/local/project
+     *                        or
+     *                        symfony/demo for a remote Github repository
+     *                        or
+     *                        symfony/demo:v1.1 for a remote Github repository with a reference
      */
     public function getStack(string $baseUri, ?string $subFolder = null): ?Stack
     {
@@ -36,7 +26,7 @@ class Detector
         foreach ($this->stackDetectors as $stackDetector) {
             $stack = $stackDetector->getStack($baseUri, $subFolder);
 
-            if ($stack !== null) {
+            if (null !== $stack) {
                 return $stack;
             }
         }
@@ -46,10 +36,10 @@ class Detector
 
     private function cleanSubFolder(?string $subFolder): ?string
     {
-        if ($subFolder === null) {
+        if (null === $subFolder) {
             return null;
         }
 
-        return trim($subFolder) === '/' ? null : $subFolder;
+        return '/' === trim($subFolder) ? null : $subFolder;
     }
 }
