@@ -8,6 +8,10 @@ use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\Exception\CacheMissException;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 
+/**
+ * We use an array cache so that we don't make expensive calls to the adapter
+ * each time. This provider is used in multiple places during a single run.
+ */
 class ComposerConfigProvider
 {
     /** @var array<string, ComposerConfig|null> */
