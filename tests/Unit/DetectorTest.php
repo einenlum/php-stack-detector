@@ -89,6 +89,8 @@ class DetectorTest extends TestCase
 
             'Statamic 4' => ['statamic/4', '4', StackType::STATAMIC],
             'Statamic unknown version' => ['statamic/unknown', null, StackType::STATAMIC],
+
+            'Composer lock test' => ['composer-lock', '6.3.5', StackType::SYMFONY],
         ];
     }
 }
