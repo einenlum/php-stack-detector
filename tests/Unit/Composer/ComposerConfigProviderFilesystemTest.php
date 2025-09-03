@@ -27,8 +27,9 @@ class ComposerConfigProviderFilesystemTest extends TestCase
     public function it_returns_a_lock_config_if_present(): void
     {
         $config = $this->sut->getComposerConfig(
+            ComposerConfigType::LOCK,
             __DIR__,
-            '../../fixtures/composer-lock',
+            '../../fixtures/composer-config/composer-lock',
         );
 
         $this->assertInstanceOf(ComposerConfig::class, $config);
@@ -40,11 +41,24 @@ class ComposerConfigProviderFilesystemTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_a_json_config_if_no_lock_is_present(): void
+    public function it_returns_null_if_no_lock_config_if_present(): void
     {
         $config = $this->sut->getComposerConfig(
+            ComposerConfigType::LOCK,
             __DIR__,
-            '../../fixtures/composer-json',
+            '../../fixtures/composer-config/composer-json',
+        );
+
+        $this->assertNull($config);
+    }
+
+    /** @test */
+    public function it_returns_a_json_config_if_present(): void
+    {
+        $config = $this->sut->getComposerConfig(
+            ComposerConfigType::JSON,
+            __DIR__,
+            '../../fixtures/composer-config/composer-json',
         );
 
         $this->assertInstanceOf(ComposerConfig::class, $config);
@@ -53,5 +67,17 @@ class ComposerConfigProviderFilesystemTest extends TestCase
         $this->assertArrayHasKey('type', $config->content);
         $this->assertArrayHasKey('license', $config->content);
         $this->assertArrayHasKey('require', $config->content);
+    }
+
+    /** @test */
+    public function it_returns_null_if_no_json_config_if_present(): void
+    {
+        $config = $this->sut->getComposerConfig(
+            ComposerConfigType::JSON,
+            __DIR__,
+            '../../fixtures/composer-config/composer-lock',
+        );
+
+        $this->assertNull($config);
     }
 }

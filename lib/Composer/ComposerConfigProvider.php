@@ -22,56 +22,41 @@ class ComposerConfigProvider
     ) {
     }
 
+    /**
+     * This returns the content of the composer lock file if it exists,
+     * otherwise the composer json file if it exists, otherwise null.
+     */
     public function getComposerConfig(
+        ComposerConfigType $type,
         string $baseUri,
         ?string $subDirectory,
     ): ?ComposerConfig {
         try {
-            return $this->getFromCache($baseUri, $subDirectory);
+            return $this->getFromCache($type, $baseUri, $subDirectory);
         } catch (CacheMissException) {
         }
 
-        $lockContent = $this->getFileContent(
+        $content = $this->getFileContent(
+            $type,
             $baseUri,
             $subDirectory,
-            'composer.lock'
         );
 
-        if (null !== $lockContent) {
-            $config = new ComposerConfig(
-                ComposerConfigType::LOCK,
-                $lockContent
-            );
-            $this->setToCache($baseUri, $subDirectory, $config);
+        $config = $content ? new ComposerConfig($type, $content) : null;
 
-            return $config;
-        }
+        $this->setToCache($type, $baseUri, $subDirectory, $config);
 
-        $jsonContent = $this->getFileContent(
-            $baseUri,
-            $subDirectory,
-            'composer.json'
-        );
-
-        if (null !== $jsonContent) {
-            $config = new ComposerConfig(
-                ComposerConfigType::JSON,
-                $jsonContent
-            );
-
-            $this->setToCache($baseUri, $subDirectory, $config);
-
-            return $config;
-        }
-
-        $this->setToCache($baseUri, $subDirectory, null);
-
-        return null;
+        return $config;
     }
 
     /** @return array<string, mixed>|null */
-    private function getFileContent(string $baseUri, ?string $subDirectory, string $filename): ?array
-    {
+    private function getFileContent(
+        ComposerConfigType $type,
+        string $baseUri,
+        ?string $subDirectory,
+    ): ?array {
+        $filename = ComposerConfigType::LOCK === $type ? 'composer.lock' : 'composer.json';
+
         if (!$this->adapter->directoryExists($baseUri, $subDirectory)) {
             return null;
         }
@@ -95,11 +80,12 @@ class ComposerConfigProvider
     }
 
     private function setToCache(
+        ComposerConfigType $type,
         string $baseUri,
         ?string $subDirectory,
         ?ComposerConfig $config,
     ): void {
-        $cacheKey = $this->getCacheKey($baseUri, $subDirectory);
+        $cacheKey = $this->getCacheKey($type, $baseUri, $subDirectory);
 
         $this->cache[$cacheKey] = $config;
     }
@@ -107,9 +93,12 @@ class ComposerConfigProvider
     /**
      * @throws CacheMissException
      */
-    private function getFromCache(string $baseUri, ?string $subDirectory): ?ComposerConfig
-    {
-        $cacheKey = $this->getCacheKey($baseUri, $subDirectory);
+    private function getFromCache(
+        ComposerConfigType $type,
+        string $baseUri,
+        ?string $subDirectory,
+    ): ?ComposerConfig {
+        $cacheKey = $this->getCacheKey($type, $baseUri, $subDirectory);
 
         if (!array_key_exists($cacheKey, $this->cache)) {
             throw new CacheMissException();
@@ -118,8 +107,11 @@ class ComposerConfigProvider
         return $this->cache[$cacheKey];
     }
 
-    private function getCacheKey(string $baseUri, ?string $subDirectory): string
-    {
-        return $baseUri.$subDirectory;
+    private function getCacheKey(
+        ComposerConfigType $type,
+        string $baseUri,
+        ?string $subDirectory,
+    ): string {
+        return $baseUri.$subDirectory.':'.$type->value;
     }
 }
