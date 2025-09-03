@@ -48,7 +48,7 @@ class DetectorTest extends TestCase
             'Laravel 6' => ['laravel/6', '6', StackType::LARAVEL],
             'Laravel 7' => ['laravel/7', '7', StackType::LARAVEL],
             'Laravel 8' => ['laravel/8', '8', StackType::LARAVEL],
-            'Laravel 9' => ['laravel/9', '9', StackType::LARAVEL],
+            'Laravel 9' => ['laravel/9', '9.8.3', StackType::LARAVEL],
             'Laravel 10' => ['laravel/10', '10', StackType::LARAVEL],
             'Laravel unknown version' => ['laravel/unknown', null, StackType::LARAVEL],
 
