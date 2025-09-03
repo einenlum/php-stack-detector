@@ -11,13 +11,13 @@ class FilesystemAdapterTest extends TestCase
 {
     private FilesystemAdapter $sut;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->sut = new FilesystemAdapter();
     }
 
     /** @test */
-    public function getFileContent(): void
+    public function get_file_content(): void
     {
         $content = $this->sut->getFileContent(__DIR__, 'FilesystemAdapterTest.php');
 
@@ -25,13 +25,13 @@ class FilesystemAdapterTest extends TestCase
     }
 
     /** @test */
-    public function itSaysIfADirectoryExists(): void
+    public function it_says_if_a_directory_exists(): void
     {
         $this->assertTrue($this->sut->directoryExists(__DIR__));
     }
 
     /** @test */
-    public function itSaysIfADirectoryDoesNotExist(): void
+    public function it_says_if_a_directory_does_not_exist(): void
     {
         $this->assertFalse($this->sut->directoryExists(
             __DIR__,
@@ -42,7 +42,7 @@ class FilesystemAdapterTest extends TestCase
     }
 
     /** @test */
-    public function itListFilesInADirectory(): void
+    public function it_lists_files_in_a_directory(): void
     {
         $files = $this->sut->listFilesInDirectory(
             __DIR__,

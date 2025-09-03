@@ -21,7 +21,7 @@ class PackageVersionProviderTest extends TestCase
     }
 
     /** @test */
-    public function itGetsTheVersionOfAPackageFromLock(): void
+    public function it_gets_the_version_of_a_package_from_lock(): void
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
@@ -33,7 +33,7 @@ class PackageVersionProviderTest extends TestCase
     }
 
     /** @test */
-    public function itGetsTheVersionOfTheFirstPackageFromLock(): void
+    public function it_gets_the_version_of_the_first_package_from_lock(): void
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
@@ -53,7 +53,7 @@ class PackageVersionProviderTest extends TestCase
     }
 
     /** @test */
-    public function itGetsTheVersionOfTheFirstPackageFromJson(): void
+    public function it_gets_the_version_of_the_first_package_from_json(): void
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
@@ -73,7 +73,7 @@ class PackageVersionProviderTest extends TestCase
     }
 
     /** @test */
-    public function itGetsTheVersionOfAPackageFromJson(): void
+    public function it_gets_the_version_of_a_package_from_json(): void
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
@@ -85,7 +85,7 @@ class PackageVersionProviderTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsNullIfPackageIsNotFoundInLock(): void
+    public function it_returns_null_if_package_is_not_found_in_lock(): void
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,
@@ -97,7 +97,7 @@ class PackageVersionProviderTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsNullIfPackageIsNotFoundInJson(): void
+    public function it_returns_null_if_package_is_not_found_in_json(): void
     {
         $version = $this->sut->getVersionForPackage(
             __DIR__,

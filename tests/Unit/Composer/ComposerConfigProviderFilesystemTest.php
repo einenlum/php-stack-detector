@@ -24,7 +24,7 @@ class ComposerConfigProviderFilesystemTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsALockConfigIfPresent(): void
+    public function it_returns_a_lock_config_if_present(): void
     {
         $config = $this->sut->getComposerConfig(
             __DIR__,
@@ -40,7 +40,7 @@ class ComposerConfigProviderFilesystemTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAJsonConfigIfNoLockIsPresent(): void
+    public function it_returns_a_json_config_if_no_lock_is_present(): void
     {
         $config = $this->sut->getComposerConfig(
             __DIR__,

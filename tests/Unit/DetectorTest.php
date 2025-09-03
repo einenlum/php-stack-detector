@@ -24,7 +24,7 @@ class DetectorTest extends TestCase
      *
      * @dataProvider packagesDataProvider
      */
-    public function itDetectsStack(string $fixtureFolder, ?string $expectedVersion, StackType $expectedType): void
+    public function it_detects_stack(string $fixtureFolder, ?string $expectedVersion, StackType $expectedType): void
     {
         $stack = $this->sut->getStack(sprintf('%s/../fixtures/%s', __DIR__, $fixtureFolder));
 
