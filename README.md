@@ -120,6 +120,18 @@ services:
 composer run test
 ```
 
+## Coding standards
+
+```
+# check CS
+composer run test-cs
+```
+
+```
+# fix CS
+composer run fix-cs
+```
+
 ## Run interactive shell with docker
 
 ```shell

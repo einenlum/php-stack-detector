@@ -35,7 +35,7 @@
         "unit-test": "phpunit tests",
         "static-analysis": "phpstan",
         "test-cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff -v",
-        "test-cs-fix": "./vendor/bin/php-cs-fixer fix --diff -v",
+        "fix-cs": "./vendor/bin/php-cs-fixer fix --diff -v",
         "test": [
             "@test-cs",
             "@static-analysis",
