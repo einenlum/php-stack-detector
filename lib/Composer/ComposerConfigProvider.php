@@ -27,7 +27,7 @@ class ComposerConfigProvider
         } catch (CacheMissException) {
         }
 
-        $lockContent = $this->getConfig(
+        $lockContent = $this->getFileContent(
             $baseUri,
             $subDirectory,
             'composer.lock'
@@ -43,7 +43,7 @@ class ComposerConfigProvider
             return $config;
         }
 
-        $jsonContent = $this->getConfig(
+        $jsonContent = $this->getFileContent(
             $baseUri,
             $subDirectory,
             'composer.json'
@@ -66,7 +66,7 @@ class ComposerConfigProvider
     }
 
     /** @return array<string, mixed>|null */
-    private function getConfig(string $baseUri, ?string $subDirectory, string $filename): ?array
+    private function getFileContent(string $baseUri, ?string $subDirectory, string $filename): ?array
     {
         if (!$this->adapter->directoryExists($baseUri, $subDirectory)) {
             return null;
