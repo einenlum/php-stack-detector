@@ -9,7 +9,7 @@ readonly class NodeConfiguration
     public function __construct(
         public ?string $version,
         public ?string $requirements,
-        public ?NodePackageManagerType $packageManager,
+        public NodePackageManagerType $packageManager,
     ) {
     }
 }

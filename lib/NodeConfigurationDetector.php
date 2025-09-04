@@ -104,7 +104,7 @@ class NodeConfigurationDetector
     private function getPackageManagerType(
         string $baseUri,
         ?string $subFolder = null,
-    ): ?NodePackageManagerType {
+    ): NodePackageManagerType {
         $lockFiles = [
             'package-lock.json' => NodePackageManagerType::NPM,
             'pnpm-lock.yaml' => NodePackageManagerType::PNPM,
