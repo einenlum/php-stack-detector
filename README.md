@@ -101,10 +101,16 @@ You can also use the CLI to test it.
 
 ```
 php bin/detect-local.php ~/Prog/php/my_project/
+Detected PHP version: Unknown version
+Detected PHP requirements: ^8.4
+Required extensions: ctype, iconv, redis, sodium
 Detected stack: laravel
 Version: 10.19.0
 
 php bin/detect-github.php 'symfony/demo'
+Detected PHP version: 8.4
+Detected PHP requirements: ^8.3
+Required extensions: ctype, iconv
 Detected stack: symfony
 Version: 6.3.0
 ```
