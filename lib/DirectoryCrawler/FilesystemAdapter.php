@@ -23,6 +23,13 @@ class FilesystemAdapter implements AdapterInterface
         return $content;
     }
 
+    public function fileExists(string $baseUri, ?string ...$pathTree): bool
+    {
+        $fullUri = $this->getFullUri($baseUri, $pathTree);
+
+        return is_file($fullUri);
+    }
+
     public function directoryExists(string $baseUri, ?string ...$pathTree): bool
     {
         $fullUri = $this->getFullUri($baseUri, $pathTree);

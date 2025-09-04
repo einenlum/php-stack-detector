@@ -6,7 +6,8 @@ namespace Einenlum\Tests\PhpStackDetector\Unit;
 
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\NodePackageManagerType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 use PHPUnit\Framework\TestCase;
 
 class DetectorTest extends TestCase
@@ -21,13 +22,202 @@ class DetectorTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_detects_no_node_version(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/no-version')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertNull($fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_node_version_from_nvmrc(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/nvmrc')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame('13.0.1', $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_node_version_from_commented_nvmrc(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/nvmrc-commented')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(null, $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_node_version_from_node_version_file(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/node-version')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame('13.0.1', $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_no_node_version_from_commented_node_version_file(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/node-version-commented')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(null, $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_requirements_from_package_json(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/package-json-requirements')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame('>=18 <20', $fullConfig->nodeConfiguration->requirements);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_no_node_configuration(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/empty')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNull($fullConfig->nodeConfiguration);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_npm(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/npm-lock')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::NPM,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_pnpm(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/pnpm-lock')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::PNPM,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_bun(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/bun-lock')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::BUN,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_yarn(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/yarn')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::YARN,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_yarn_berry(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/yarn-berry')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::YARN_BERRY,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
      *
      * @dataProvider packagesDataProvider
      */
     public function it_detects_stack(string $fixtureFolder, ?string $expectedVersion, StackType $expectedType): void
     {
         $fullConfig = $this->sut->getFullConfiguration(
-            sprintf('%s/../fixtures/%s', __DIR__, $fixtureFolder)
+            sprintf('%s/../fixtures/php-stack/%s', __DIR__, $fixtureFolder)
         );
 
         $this->assertNotNull($fullConfig);
@@ -201,7 +391,7 @@ class DetectorTest extends TestCase
             'Statamic 4' => ['statamic/4', '4', StackType::STATAMIC],
             'Statamic unknown version' => ['statamic/unknown', null, StackType::STATAMIC],
 
-            'Composer lock test' => ['composer-lock', '6.3.5', StackType::SYMFONY],
+            'Composer lock test' => ['symfony-in-composer-lock', '6.3.5', StackType::SYMFONY],
         ];
     }
 }

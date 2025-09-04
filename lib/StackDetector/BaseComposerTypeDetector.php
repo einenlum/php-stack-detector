@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Einenlum\PhpStackDetector\StackDetector;
 
 use Einenlum\PhpStackDetector\Composer\PackageVersionProvider;
-use Einenlum\PhpStackDetector\Stack;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\DTO\Stack;
+use Einenlum\PhpStackDetector\Enum\StackType;
 
 abstract class BaseComposerTypeDetector
 {

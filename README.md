@@ -23,6 +23,16 @@ Supported Stacks for now:
 - Winter CMS
 - Wordpress
 
+It also detects if the repository uses nodeJS. If so, it detects node version (through .nvmrc or .node-version), node version requirements, and package manager.
+
+Detected package managers:
+
+- npm
+- pnpm
+- bun
+- yarn
+- yarn berry
+
 ## Install
 
 ```
@@ -39,7 +49,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
 use Einenlum\PhpStackDetector\Factory\GithubDetectorFactory;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 
 // Local usage
 
@@ -107,12 +117,20 @@ Required extensions: ctype, iconv, redis, sodium
 Detected stack: laravel
 Version: 10.19.0
 
+Detected Node.js version: 22.0
+Detected Node.js requirements: Unknown version
+Package Manager: bun
+
 php bin/detect-github.php 'symfony/demo'
 Detected PHP version: 8.4
 Detected PHP requirements: ^8.3
 Required extensions: ctype, iconv
 Detected stack: symfony
 Version: 6.3.0
+
+Detected Node.js version: Unknown version
+Detected Node.js requirements: Unknown version
+Package Manager: npm
 ```
 
 It is advised to use an access token for github parsing, to either access private repositories or avoid reaching Github API limit.
@@ -121,6 +139,10 @@ It is advised to use an access token for github parsing, to either access privat
 GITHUB_ACCESS_TOKEN=my_token php bin/detect-github.php 'einenlum/private-repo'
 Detected stack: laravel
 Version: 10.19.0
+
+Detected Node.js version: Unknown version
+Detected Node.js requirements: Unknown version
+Package Manager: npm
 ```
 
 ### Usage with Symfony

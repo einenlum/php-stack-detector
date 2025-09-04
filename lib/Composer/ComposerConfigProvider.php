@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Composer;
 
+use Einenlum\PhpStackDetector\DTO\Composer\ComposerConfig;
+use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\Exception\CacheMissException;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
@@ -22,10 +24,6 @@ class ComposerConfigProvider
     ) {
     }
 
-    /**
-     * This returns the content of the composer lock file if it exists,
-     * otherwise the composer json file if it exists, otherwise null.
-     */
     public function getComposerConfig(
         ComposerConfigType $type,
         string $baseUri,

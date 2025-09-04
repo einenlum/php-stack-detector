@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Einenlum\PhpStackDetector\StackDetector;
 
 use Einenlum\PhpStackDetector\StackDetectorInterface;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 
 class CodeigniterDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {
