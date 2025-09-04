@@ -4,11 +4,24 @@ This library allows to easily detect the PHP stack (Wordpress, Laravel, Symfonyâ
 
 Supported Stacks for now:
 
-- Wordpress
-- Laravel
-- Symfony
-- Statamic
+- Bolt CMS
+- Cakephp
+- Codeigniter
 - Craft CMS
+- Drupal
+- Grav CMS
+- Laravel
+- Leaf PHP
+- Lunar
+- October CMS
+- Shopware
+- Statamic
+- Symfony
+- Tempest
+- Twill
+- Typo3 CMS
+- Winter CMS
+- Wordpress
 
 ## Install
 
