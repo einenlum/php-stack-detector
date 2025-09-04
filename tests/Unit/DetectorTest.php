@@ -21,6 +21,81 @@ class DetectorTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_detects_no_node_version(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/no-version')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertNull($fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_node_version_from_nvmrc(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/nvmrc')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame('13.0.1', $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_node_version_from_commented_nvmrc(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/nvmrc-commented')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(null, $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_node_version_from_node_version_file(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/node-version')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame('13.0.1', $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_no_node_version_from_commented_node_version_file(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/node-version-commented')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(null, $fullConfig->nodeConfiguration->version);
+    }
+
+    /**
+     * @test
      *
      * @dataProvider packagesDataProvider
      */

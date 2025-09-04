@@ -9,6 +9,7 @@ readonly class Detector
     /** @param StackDetectorInterface[] $stackDetectors */
     public function __construct(
         private PhpConfigurationDetector $phpConfigurationDetector,
+        private NodeConfigurationDetector $nodeConfigurationDetector,
         private array $stackDetectors,
     ) {
     }
@@ -18,11 +19,12 @@ readonly class Detector
         $subFolder = $this->cleanSubFolder($subFolder);
 
         $phpConfiguration = $this->getPhpConfiguration($baseUri, $subFolder);
+        $nodeConfiguration = $this->getNodeConfiguration($baseUri, $subFolder);
         $stack = $this->getStack($baseUri, $subFolder);
 
         return new FullConfiguration(
             $phpConfiguration,
-            null,
+            $nodeConfiguration,
             $stack,
         );
     }
@@ -30,6 +32,11 @@ readonly class Detector
     private function getPhpConfiguration(string $baseUri, ?string $subFolder = null): PhpConfiguration
     {
         return $this->phpConfigurationDetector->getPhpConfiguration($baseUri, $subFolder);
+    }
+
+    private function getNodeConfiguration(string $baseUri, ?string $subFolder = null): NodeConfiguration
+    {
+        return $this->nodeConfigurationDetector->getNodeConfiguration($baseUri, $subFolder);
     }
 
     /**
