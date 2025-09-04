@@ -54,7 +54,7 @@ class DetectorTest extends TestCase
     public function it_detects_no_php_version_if_config_platform_is_not_present()
     {
         $fullConfig = $this->sut->getFullConfiguration(
-            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/empty')
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/php-requirements')
         );
 
         $this->assertNotNull($fullConfig);
@@ -81,7 +81,7 @@ class DetectorTest extends TestCase
     public function it_detects_no_php_requirements_if_not_present()
     {
         $fullConfig = $this->sut->getFullConfiguration(
-            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/config-platform')
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/platform-config')
         );
 
         $this->assertNotNull($fullConfig);
