@@ -2,21 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Composer;
+namespace Einenlum\PhpStackDetector\Node;
 
-use Einenlum\PhpStackDetector\DTO\Composer\ComposerConfig;
-use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\Exception\CacheMissException;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 
-/**
- * We use an array cache so that we don't make expensive calls to the adapter
- * each time. This provider is used in multiple places during a single run.
- */
-class ComposerConfigProvider
+class PackageJsonProvider
 {
-    /** @var array<string, ComposerConfig|null> */
+    /** @var array<string, mixed|null> */
     private array $cache = [];
 
     public function __construct(
@@ -24,37 +18,31 @@ class ComposerConfigProvider
     ) {
     }
 
-    public function getComposerConfig(
-        ComposerConfigType $type,
+    /** @return array<string, mixed>|null */
+    public function getPackageJsonConfig(
         string $baseUri,
         ?string $subDirectory,
-    ): ?ComposerConfig {
+    ): ?array {
         try {
-            return $this->getFromCache($type, $baseUri, $subDirectory);
+            return $this->getFromCache($baseUri, $subDirectory);
         } catch (CacheMissException) {
         }
 
         $content = $this->getFileContent(
-            $type,
             $baseUri,
             $subDirectory,
         );
 
-        $config = $content ? new ComposerConfig($type, $content) : null;
+        $this->setToCache($baseUri, $subDirectory, $content);
 
-        $this->setToCache($type, $baseUri, $subDirectory, $config);
-
-        return $config;
+        return $content;
     }
 
     /** @return array<string, mixed>|null */
     private function getFileContent(
-        ComposerConfigType $type,
         string $baseUri,
         ?string $subDirectory,
     ): ?array {
-        $filename = ComposerConfigType::LOCK === $type ? 'composer.lock' : 'composer.json';
-
         if (!$this->adapter->directoryExists($baseUri, $subDirectory)) {
             return null;
         }
@@ -63,7 +51,7 @@ class ComposerConfigProvider
             $fileContent = $this->adapter->getFileContent(
                 $baseUri,
                 $subDirectory,
-                $filename
+                'package.json'
             );
         } catch (ResourceNotFoundException $e) {
             return null;
@@ -77,26 +65,27 @@ class ComposerConfigProvider
         return $decoded;
     }
 
+    /** @param array<string, mixed>|null $config */
     private function setToCache(
-        ComposerConfigType $type,
         string $baseUri,
         ?string $subDirectory,
-        ?ComposerConfig $config,
+        ?array $config,
     ): void {
-        $cacheKey = $this->getCacheKey($type, $baseUri, $subDirectory);
+        $cacheKey = $this->getCacheKey($baseUri, $subDirectory);
 
         $this->cache[$cacheKey] = $config;
     }
 
     /**
+     * @return array<string, mixed>|null
+     *
      * @throws CacheMissException
      */
     private function getFromCache(
-        ComposerConfigType $type,
         string $baseUri,
         ?string $subDirectory,
-    ): ?ComposerConfig {
-        $cacheKey = $this->getCacheKey($type, $baseUri, $subDirectory);
+    ): ?array {
+        $cacheKey = $this->getCacheKey($baseUri, $subDirectory);
 
         if (!array_key_exists($cacheKey, $this->cache)) {
             throw new CacheMissException();
@@ -106,10 +95,9 @@ class ComposerConfigProvider
     }
 
     private function getCacheKey(
-        ComposerConfigType $type,
         string $baseUri,
         ?string $subDirectory,
     ): string {
-        return $baseUri.$subDirectory.':'.$type->value;
+        return $baseUri.$subDirectory;
     }
 }

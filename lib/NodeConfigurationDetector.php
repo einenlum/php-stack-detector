@@ -8,24 +8,25 @@ use Einenlum\PhpStackDetector\DTO\NodeConfiguration;
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\Enum\NodePackageManagerType;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
+use Einenlum\PhpStackDetector\Node\PackageJsonProvider;
 
 class NodeConfigurationDetector
 {
-    public function __construct(private AdapterInterface $adapter)
-    {
+    public function __construct(
+        private PackageJsonProvider $packageJsonProvider,
+        private AdapterInterface $adapter,
+    ) {
     }
 
     public function getNodeConfiguration(
         string $baseUri,
         ?string $subFolder = null,
     ): ?NodeConfiguration {
-        $packageJsonExists = $this->adapter->fileExists(
+        $packageJsonConfig = $this->packageJsonProvider->getPackageJsonConfig(
             $baseUri,
             $subFolder,
-            'package.json'
         );
-
-        if (!$packageJsonExists) {
+        if (null === $packageJsonConfig) {
             return null;
         }
 
@@ -65,19 +66,16 @@ class NodeConfigurationDetector
 
     private function getVersionRequirements(string $baseUri, ?string $subFolder = null): ?string
     {
-        $packageJsonContent = $this->getFileContent(
+        $packageJsonContent = $this->packageJsonProvider->getPackageJsonConfig(
             $baseUri,
             $subFolder,
-            'package.json'
         );
 
         if (null === $packageJsonContent) {
             return null;
         }
 
-        $packageData = json_decode($packageJsonContent, true, 512, \JSON_THROW_ON_ERROR);
-
-        return $packageData['engines']['node'] ?? null;
+        return $packageJsonContent['engines']['node'] ?? null;
     }
 
     private function extractNodeVersion(?string $content): ?string
@@ -153,8 +151,10 @@ class NodeConfigurationDetector
         return NodePackageManagerType::NPM; // Default to NPM if no lock file or packageManager field is found
     }
 
-    private function detectYarn(string $baseUri, ?string $subFolder = null): ?NodePackageManagerType
-    {
+    private function detectYarn(
+        string $baseUri,
+        ?string $subFolder = null,
+    ): ?NodePackageManagerType {
         if (!$this->adapter->fileExists($baseUri, $subFolder, 'yarn.lock')) {
             return null;
         }

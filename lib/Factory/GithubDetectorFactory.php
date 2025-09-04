@@ -7,6 +7,7 @@ namespace Einenlum\PhpStackDetector\Factory;
 use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\DirectoryCrawler\GithubAdapter;
+use Einenlum\PhpStackDetector\Node\PackageJsonProvider;
 use Einenlum\PhpStackDetector\NodeConfigurationDetector;
 use Einenlum\PhpStackDetector\PhpConfigurationDetector;
 use Github\Client;
@@ -21,7 +22,12 @@ class GithubDetectorFactory
         $adapter = new GithubAdapter($client);
         $composerConfigProvider = new ComposerConfigProvider($adapter);
         $phpConfigurationDetector = new PhpConfigurationDetector($composerConfigProvider);
-        $nodeConfigurationDetector = new NodeConfigurationDetector($adapter);
+
+        $packageJsonProvider = new PackageJsonProvider($adapter);
+        $nodeConfigurationDetector = new NodeConfigurationDetector(
+            $packageJsonProvider,
+            $adapter
+        );
 
         $stackDetectors = $this->getStackDetectors($composerConfigProvider, $adapter);
 
