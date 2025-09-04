@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\Tests\PhpStackDetector\Unit\Composer;
+namespace Fortrabbit\Tests\StackDetector\Unit\Composer;
 
-use Fortrabbit\PhpStackDetector\Composer\ComposerConfigProvider;
-use Fortrabbit\PhpStackDetector\Composer\PackageVersionProvider;
-use Fortrabbit\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
+use Fortrabbit\StackDetector\Composer\ComposerConfigProvider;
+use Fortrabbit\StackDetector\Composer\PackageVersionProvider;
+use Fortrabbit\StackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
 
 class PackageVersionProviderTest extends TestCase

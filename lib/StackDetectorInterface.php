@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector;
+namespace Fortrabbit\StackDetector;
 
-use Fortrabbit\PhpStackDetector\DTO\Stack;
+use Fortrabbit\StackDetector\DTO\Stack;
 
 interface StackDetectorInterface
 {

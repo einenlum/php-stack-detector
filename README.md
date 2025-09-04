@@ -1,4 +1,4 @@
-# PHP Stack Detector
+# Stack Detector
 
 This library allows to easily detect the PHP stack (Wordpress, Laravel, Symfony…) and the version used, when parsing a directory or ar Github remote repository.
 
@@ -36,7 +36,7 @@ Detected package managers:
 ## Install
 
 ```
-composer require fortrabbit/php-stack-detector
+composer require fortrabbit/stack-detector
 ```
 
 ## Usage
@@ -46,10 +46,10 @@ composer require fortrabbit/php-stack-detector
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Fortrabbit\PhpStackDetector\Detector;
-use Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory;
-use Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory;
-use Fortrabbit\PhpStackDetector\Enum\StackType;
+use Fortrabbit\StackDetector\Detector;
+use Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory;
+use Fortrabbit\StackDetector\Factory\GithubDetectorFactory;
+use Fortrabbit\StackDetector\Enum\StackType;
 
 // Local usage
 
@@ -153,10 +153,10 @@ For Github:
 
 ```yaml
 services:
-    Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory: ~
+    Fortrabbit\StackDetector\Factory\GithubDetectorFactory: ~
 
-    Fortrabbit\PhpStackDetector\Detector:
-        factory: ['@Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory', 'create']
+    Fortrabbit\StackDetector\Detector:
+        factory: ['@Fortrabbit\StackDetector\Factory\GithubDetectorFactory', 'create']
         arguments:
             $client: '@Github\Client'
 ```
@@ -165,10 +165,10 @@ For local filesystem:
 
 ```yaml
 services:
-    Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory: ~
+    Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory: ~
 
-    Fortrabbit\PhpStackDetector\Detector:
-        factory: ['@Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory', 'create']
+    Fortrabbit\StackDetector\Detector:
+        factory: ['@Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory', 'create']
 ```
 
 ## Tests

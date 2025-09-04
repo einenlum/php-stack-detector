@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector;
+namespace Fortrabbit\StackDetector;
 
-use Fortrabbit\PhpStackDetector\DTO\NodeConfiguration;
-use Fortrabbit\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-use Fortrabbit\PhpStackDetector\Enum\NodePackageManagerType;
-use Fortrabbit\PhpStackDetector\Exception\ResourceNotFoundException;
-use Fortrabbit\PhpStackDetector\Node\PackageJsonProvider;
+use Fortrabbit\StackDetector\DTO\NodeConfiguration;
+use Fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use Fortrabbit\StackDetector\Enum\NodePackageManagerType;
+use Fortrabbit\StackDetector\Exception\ResourceNotFoundException;
+use Fortrabbit\StackDetector\Node\PackageJsonProvider;
 
 class NodeConfigurationDetector
 {

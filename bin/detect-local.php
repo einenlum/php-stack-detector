@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-use Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory;
+use Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory;
 
 $factory = new FilesystemDetectorFactory();
 $detector = $factory->create();

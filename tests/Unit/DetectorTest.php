@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\Tests\PhpStackDetector\Unit;
+namespace Fortrabbit\Tests\StackDetector\Unit;
 
-use Fortrabbit\PhpStackDetector\Detector;
-use Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory;
-use Fortrabbit\PhpStackDetector\Enum\NodePackageManagerType;
-use Fortrabbit\PhpStackDetector\Enum\StackType;
+use Fortrabbit\StackDetector\Detector;
+use Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory;
+use Fortrabbit\StackDetector\Enum\NodePackageManagerType;
+use Fortrabbit\StackDetector\Enum\StackType;
 use PHPUnit\Framework\TestCase;
 
 class DetectorTest extends TestCase

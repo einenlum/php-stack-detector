@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector\StackDetector;
+namespace Fortrabbit\StackDetector\StackDetector;
 
-use Fortrabbit\PhpStackDetector\StackDetectorInterface;
-use Fortrabbit\PhpStackDetector\Enum\StackType;
+use Fortrabbit\StackDetector\StackDetectorInterface;
+use Fortrabbit\StackDetector\Enum\StackType;
 
 class StatamicDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector\Composer;
+namespace Fortrabbit\StackDetector\Composer;
 
-use Fortrabbit\PhpStackDetector\DTO\Composer\PackageVersion;
-use Fortrabbit\PhpStackDetector\DTO\Enum\ComposerConfigType;
+use Fortrabbit\StackDetector\DTO\Composer\PackageVersion;
+use Fortrabbit\StackDetector\DTO\Enum\ComposerConfigType;
 
 readonly class PackageVersionProvider
 {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector\Factory;
+namespace Fortrabbit\StackDetector\Factory;
 
-use Fortrabbit\PhpStackDetector\Composer\ComposerConfigProvider;
-use Fortrabbit\PhpStackDetector\Detector;
-use Fortrabbit\PhpStackDetector\DirectoryCrawler\GithubAdapter;
-use Fortrabbit\PhpStackDetector\Node\PackageJsonProvider;
-use Fortrabbit\PhpStackDetector\NodeConfigurationDetector;
-use Fortrabbit\PhpStackDetector\PhpConfigurationDetector;
+use Fortrabbit\StackDetector\Composer\ComposerConfigProvider;
+use Fortrabbit\StackDetector\Detector;
+use Fortrabbit\StackDetector\DirectoryCrawler\GithubAdapter;
+use Fortrabbit\StackDetector\Node\PackageJsonProvider;
+use Fortrabbit\StackDetector\NodeConfigurationDetector;
+use Fortrabbit\StackDetector\PhpConfigurationDetector;
 use Github\Client;
 
 class GithubDetectorFactory

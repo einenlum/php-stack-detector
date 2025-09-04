@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector\DTO;
+namespace Fortrabbit\StackDetector\DTO;
 
 readonly class FullConfiguration
 {

@@ -1,16 +1,16 @@
 {
-    "name": "fortrabbit/php-stack-detector",
-    "description": "A package to detect the PHP stack of a project",
+    "name": "fortrabbit/stack-detector",
+    "description": "A package to detect the PHP stack and node config of a project",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Fortrabbit\\PhpStackDetector\\": "lib/"
+            "Fortrabbit\\StackDetector\\": "lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fortrabbit\\Tests\\PhpStackDetector\\": "tests/"
+            "Fortrabbit\\Tests\\StackDetector\\": "tests/"
         }
     },
     "authors": [

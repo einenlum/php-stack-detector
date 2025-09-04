@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector\Node;
+namespace Fortrabbit\StackDetector\Node;
 
-use Fortrabbit\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-use Fortrabbit\PhpStackDetector\Exception\CacheMissException;
-use Fortrabbit\PhpStackDetector\Exception\ResourceNotFoundException;
+use Fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use Fortrabbit\StackDetector\Exception\CacheMissException;
+use Fortrabbit\StackDetector\Exception\ResourceNotFoundException;
 
 class PackageJsonProvider
 {

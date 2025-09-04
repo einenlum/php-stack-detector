@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\PhpStackDetector\DTO\Composer;
+namespace Fortrabbit\StackDetector\DTO\Composer;
 
 use Fortrabbit\ComposerVersionParser\Parser;
 

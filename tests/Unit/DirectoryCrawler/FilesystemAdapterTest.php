@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\Tests\PhpStackDetector\Unit\DirectoryCrawler;
+namespace Fortrabbit\Tests\StackDetector\Unit\DirectoryCrawler;
 
-use Fortrabbit\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
+use Fortrabbit\StackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
 
 class FilesystemAdapterTest extends TestCase
