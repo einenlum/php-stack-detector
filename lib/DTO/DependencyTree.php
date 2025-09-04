@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\DTO;
+namespace fortrabbit\StackDetector\DTO;
 
-use Fortrabbit\StackDetector\StackDetector\LunarDetector;
-use Fortrabbit\StackDetector\StackDetector\OctoberCMSDetector;
-use Fortrabbit\StackDetector\StackDetector\StatamicDetector;
-use Fortrabbit\StackDetector\StackDetector\TwillDetector;
-use Fortrabbit\StackDetector\StackDetector\WinterCMSDetector;
+use fortrabbit\StackDetector\StackDetector\LunarDetector;
+use fortrabbit\StackDetector\StackDetector\OctoberCMSDetector;
+use fortrabbit\StackDetector\StackDetector\StatamicDetector;
+use fortrabbit\StackDetector\StackDetector\TwillDetector;
+use fortrabbit\StackDetector\StackDetector\WinterCMSDetector;
 
 class DependencyTree
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\DTO;
+namespace fortrabbit\StackDetector\DTO;
 
-use Fortrabbit\StackDetector\Enum\NodePackageManagerType;
+use fortrabbit\StackDetector\Enum\NodePackageManagerType;
 
 readonly class NodeConfiguration
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\StackDetector;
+namespace fortrabbit\StackDetector\StackDetector;
 
-use Fortrabbit\StackDetector\StackDetectorInterface;
-use Fortrabbit\StackDetector\Enum\StackType;
+use fortrabbit\StackDetector\StackDetectorInterface;
+use fortrabbit\StackDetector\Enum\StackType;
 
 class Typo3Detector extends BaseComposerTypeDetector implements StackDetectorInterface
 {

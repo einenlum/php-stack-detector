@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\DTO;
+namespace fortrabbit\StackDetector\DTO;
 
-use Fortrabbit\StackDetector\Enum\StackType;
+use fortrabbit\StackDetector\Enum\StackType;
 
 readonly class Stack
 {

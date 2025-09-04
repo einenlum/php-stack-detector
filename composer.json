@@ -5,12 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Fortrabbit\\StackDetector\\": "lib/"
+            "fortrabbit\\StackDetector\\": "lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fortrabbit\\Tests\\StackDetector\\": "tests/"
+            "fortrabbit\\Tests\\StackDetector\\": "tests/"
         }
     },
     "authors": [

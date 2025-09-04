@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\Factory;
+namespace fortrabbit\StackDetector\Factory;
 
-use Fortrabbit\StackDetector\Composer\ComposerConfigProvider;
-use Fortrabbit\StackDetector\Composer\PackageVersionProvider;
-use Fortrabbit\StackDetector\StackDetector\BoltCMSDetector;
-use Fortrabbit\StackDetector\StackDetector\CakePhpDetector;
-use Fortrabbit\StackDetector\StackDetector\CodeigniterDetector;
-use Fortrabbit\StackDetector\StackDetector\DrupalDetector;
-use Fortrabbit\StackDetector\StackDetector\GravCMSDetector;
-use Fortrabbit\StackDetector\StackDetector\LeafDetector;
-use Fortrabbit\StackDetector\StackDetector\LunarDetector;
-use Fortrabbit\StackDetector\StackDetector\OctoberCMSDetector;
-use Fortrabbit\StackDetector\StackDetector\ShopwareDetector;
-use Fortrabbit\StackDetector\StackDetector\TempestDetector;
-use Fortrabbit\StackDetector\StackDetector\TwillDetector;
-use Fortrabbit\StackDetector\StackDetector\Typo3Detector;
-use Fortrabbit\StackDetector\StackDetector\WinterCMSDetector;
-use Fortrabbit\StackDetector\StackDetectorInterface;
-use Fortrabbit\StackDetector\StackDetector\CraftCMSDetector;
-use Fortrabbit\StackDetector\StackDetector\LaravelDetector;
-use Fortrabbit\StackDetector\StackDetector\StatamicDetector;
-use Fortrabbit\StackDetector\StackDetector\SymfonyDetector;
-use Fortrabbit\StackDetector\StackDetector\WordpressDetector;
-use Fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use fortrabbit\StackDetector\Composer\ComposerConfigProvider;
+use fortrabbit\StackDetector\Composer\PackageVersionProvider;
+use fortrabbit\StackDetector\StackDetector\BoltCMSDetector;
+use fortrabbit\StackDetector\StackDetector\CakePhpDetector;
+use fortrabbit\StackDetector\StackDetector\CodeigniterDetector;
+use fortrabbit\StackDetector\StackDetector\DrupalDetector;
+use fortrabbit\StackDetector\StackDetector\GravCMSDetector;
+use fortrabbit\StackDetector\StackDetector\LeafDetector;
+use fortrabbit\StackDetector\StackDetector\LunarDetector;
+use fortrabbit\StackDetector\StackDetector\OctoberCMSDetector;
+use fortrabbit\StackDetector\StackDetector\ShopwareDetector;
+use fortrabbit\StackDetector\StackDetector\TempestDetector;
+use fortrabbit\StackDetector\StackDetector\TwillDetector;
+use fortrabbit\StackDetector\StackDetector\Typo3Detector;
+use fortrabbit\StackDetector\StackDetector\WinterCMSDetector;
+use fortrabbit\StackDetector\StackDetectorInterface;
+use fortrabbit\StackDetector\StackDetector\CraftCMSDetector;
+use fortrabbit\StackDetector\StackDetector\LaravelDetector;
+use fortrabbit\StackDetector\StackDetector\StatamicDetector;
+use fortrabbit\StackDetector\StackDetector\SymfonyDetector;
+use fortrabbit\StackDetector\StackDetector\WordpressDetector;
+use fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
 
 trait HasStackDetectors
 {

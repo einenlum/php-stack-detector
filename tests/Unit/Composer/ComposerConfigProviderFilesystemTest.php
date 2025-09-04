@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\Tests\StackDetector\Unit\Composer;
+namespace fortrabbit\Tests\StackDetector\Unit\Composer;
 
-use Fortrabbit\StackDetector\DTO\Composer\ComposerConfig;
-use Fortrabbit\StackDetector\Composer\ComposerConfigProvider;
-use Fortrabbit\StackDetector\DTO\Enum\ComposerConfigType;
-use Fortrabbit\StackDetector\DirectoryCrawler\FilesystemAdapter;
+use fortrabbit\StackDetector\DTO\Composer\ComposerConfig;
+use fortrabbit\StackDetector\Composer\ComposerConfigProvider;
+use fortrabbit\StackDetector\DTO\Enum\ComposerConfigType;
+use fortrabbit\StackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
 
 /**

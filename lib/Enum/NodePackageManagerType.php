@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\Enum;
+namespace fortrabbit\StackDetector\Enum;
 
 enum NodePackageManagerType: string
 {

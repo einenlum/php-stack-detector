@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\DTO\Composer;
+namespace fortrabbit\StackDetector\DTO\Composer;
 
-use Fortrabbit\StackDetector\DTO\Enum\ComposerConfigType;
+use fortrabbit\StackDetector\DTO\Enum\ComposerConfigType;
 
 readonly class ComposerConfig
 {

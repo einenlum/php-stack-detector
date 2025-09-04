@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\StackDetector;
+namespace fortrabbit\StackDetector\StackDetector;
 
-use Fortrabbit\StackDetector\Composer\PackageVersionProvider;
-use Fortrabbit\StackDetector\DTO\Stack;
-use Fortrabbit\StackDetector\Enum\StackType;
+use fortrabbit\StackDetector\Composer\PackageVersionProvider;
+use fortrabbit\StackDetector\DTO\Stack;
+use fortrabbit\StackDetector\Enum\StackType;
 
 abstract class BaseComposerTypeDetector
 {

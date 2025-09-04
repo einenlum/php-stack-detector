@@ -46,10 +46,10 @@ composer require fortrabbit/stack-detector
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Fortrabbit\StackDetector\Detector;
-use Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory;
-use Fortrabbit\StackDetector\Factory\GithubDetectorFactory;
-use Fortrabbit\StackDetector\Enum\StackType;
+use fortrabbit\StackDetector\Detector;
+use fortrabbit\StackDetector\Factory\FilesystemDetectorFactory;
+use fortrabbit\StackDetector\Factory\GithubDetectorFactory;
+use fortrabbit\StackDetector\Enum\StackType;
 
 // Local usage
 
@@ -153,10 +153,10 @@ For Github:
 
 ```yaml
 services:
-    Fortrabbit\StackDetector\Factory\GithubDetectorFactory: ~
+    fortrabbit\StackDetector\Factory\GithubDetectorFactory: ~
 
-    Fortrabbit\StackDetector\Detector:
-        factory: ['@Fortrabbit\StackDetector\Factory\GithubDetectorFactory', 'create']
+    fortrabbit\StackDetector\Detector:
+        factory: ['@fortrabbit\StackDetector\Factory\GithubDetectorFactory', 'create']
         arguments:
             $client: '@Github\Client'
 ```
@@ -165,10 +165,10 @@ For local filesystem:
 
 ```yaml
 services:
-    Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory: ~
+    fortrabbit\StackDetector\Factory\FilesystemDetectorFactory: ~
 
-    Fortrabbit\StackDetector\Detector:
-        factory: ['@Fortrabbit\StackDetector\Factory\FilesystemDetectorFactory', 'create']
+    fortrabbit\StackDetector\Detector:
+        factory: ['@fortrabbit\StackDetector\Factory\FilesystemDetectorFactory', 'create']
 ```
 
 ## Tests

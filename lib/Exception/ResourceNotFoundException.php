@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\Exception;
+namespace fortrabbit\StackDetector\Exception;
 
 class ResourceNotFoundException extends \RuntimeException
 {

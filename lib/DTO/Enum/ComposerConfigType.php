@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\DTO\Enum;
+namespace fortrabbit\StackDetector\DTO\Enum;
 
 enum ComposerConfigType: string
 {

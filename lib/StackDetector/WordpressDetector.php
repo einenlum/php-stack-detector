@@ -1,12 +1,12 @@
 <?php
 
-namespace Fortrabbit\StackDetector\StackDetector;
+namespace fortrabbit\StackDetector\StackDetector;
 
-use Fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
-use Fortrabbit\StackDetector\Exception\ResourceNotFoundException;
-use Fortrabbit\StackDetector\DTO\Stack;
-use Fortrabbit\StackDetector\StackDetectorInterface;
-use Fortrabbit\StackDetector\Enum\StackType;
+use fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use fortrabbit\StackDetector\Exception\ResourceNotFoundException;
+use fortrabbit\StackDetector\DTO\Stack;
+use fortrabbit\StackDetector\StackDetectorInterface;
+use fortrabbit\StackDetector\Enum\StackType;
 
 class WordpressDetector implements StackDetectorInterface
 {

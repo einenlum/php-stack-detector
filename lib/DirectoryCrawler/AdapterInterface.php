@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector\DirectoryCrawler;
+namespace fortrabbit\StackDetector\DirectoryCrawler;
 
-use Fortrabbit\StackDetector\Exception\ResourceNotFoundException;
+use fortrabbit\StackDetector\Exception\ResourceNotFoundException;
 
 interface AdapterInterface
 {

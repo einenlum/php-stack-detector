@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fortrabbit\StackDetector;
+namespace fortrabbit\StackDetector;
 
-use Fortrabbit\StackDetector\DTO\FullConfiguration;
-use Fortrabbit\StackDetector\DTO\NodeConfiguration;
-use Fortrabbit\StackDetector\DTO\PhpConfiguration;
-use Fortrabbit\StackDetector\DTO\Stack;
+use fortrabbit\StackDetector\DTO\FullConfiguration;
+use fortrabbit\StackDetector\DTO\NodeConfiguration;
+use fortrabbit\StackDetector\DTO\PhpConfiguration;
+use fortrabbit\StackDetector\DTO\Stack;
 
 readonly class Detector
 {
