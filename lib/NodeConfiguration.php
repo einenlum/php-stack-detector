@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector;
 
-class NodeConfiguration
+readonly class NodeConfiguration
 {
     public function __construct(
-        public readonly ?string $version,
-        public readonly ?string $requirements,
-        public readonly ?string $packageManager,
+        public ?string $version,
+        public ?string $requirements,
+        public ?NodePackageManagerType $packageManager,
     ) {
     }
 }

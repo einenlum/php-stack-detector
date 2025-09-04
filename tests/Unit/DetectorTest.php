@@ -6,6 +6,7 @@ namespace Einenlum\Tests\PhpStackDetector\Unit;
 
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
+use Einenlum\PhpStackDetector\NodePackageManagerType;
 use Einenlum\PhpStackDetector\StackType;
 use PHPUnit\Framework\TestCase;
 
@@ -107,6 +108,105 @@ class DetectorTest extends TestCase
 
         $this->assertNotNull($fullConfig->nodeConfiguration);
         $this->assertSame('>=18 <20', $fullConfig->nodeConfiguration->requirements);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_no_node_configuration(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/empty')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNull($fullConfig->nodeConfiguration);
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_npm(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/npm-lock')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::NPM,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_pnpm(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/pnpm-lock')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::PNPM,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_bun(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/bun-lock')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::BUN,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_yarn(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/yarn')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::YARN,
+            $fullConfig->nodeConfiguration->packageManager
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_detects_yarn_berry(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/yarn-berry')
+        );
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame(
+            NodePackageManagerType::YARN_BERRY,
+            $fullConfig->nodeConfiguration->packageManager
+        );
     }
 
     /**

@@ -17,10 +17,20 @@ class NodeConfigurationDetector
         string $baseUri,
         ?string $subFolder = null,
     ): ?NodeConfiguration {
+        $packageJsonExists = $this->adapter->fileExists(
+            $baseUri,
+            $subFolder,
+            'package.json'
+        );
+
+        if (!$packageJsonExists) {
+            return null;
+        }
+
         return new NodeConfiguration(
             $this->getNodeVersion($baseUri, $subFolder),
             $this->getVersionRequirements($baseUri, $subFolder),
-            null,
+            $this->getPackageManagerType($baseUri, $subFolder),
         );
     }
 
@@ -89,6 +99,69 @@ class NodeConfigurationDetector
         $version = ltrim($firstLine, 'v');
 
         return $version ?: null;
+    }
+
+    private function getPackageManagerType(
+        string $baseUri,
+        ?string $subFolder = null,
+    ): ?NodePackageManagerType {
+        $lockFiles = [
+            'package-lock.json' => NodePackageManagerType::NPM,
+            'pnpm-lock.yaml' => NodePackageManagerType::PNPM,
+            'bun.lock' => NodePackageManagerType::BUN,
+        ];
+
+        foreach ($lockFiles as $filename => $type) {
+            if ($this->adapter->fileExists($baseUri, $subFolder, $filename)) {
+                return $type;
+            }
+        }
+
+        $yarnType = $this->detectYarn($baseUri, $subFolder);
+        if (null !== $yarnType) {
+            return $yarnType;
+        }
+
+        /** @var string $packageJsonContent */
+        $packageJsonContent = $this->getFileContent(
+            $baseUri,
+            $subFolder,
+            'package.json'
+        );
+
+        $packageData = json_decode(
+            $packageJsonContent,
+            true,
+            512,
+            \JSON_THROW_ON_ERROR
+        );
+
+        $packageManager = $packageData['packageManager'] ?? null;
+        if (null !== $packageManager) {
+            $packageManagerParts = explode('@', $packageManager);
+            $managerName = $packageManagerParts[0];
+
+            $managerType = NodePackageManagerType::tryFrom($managerName);
+
+            if (null !== $managerType) {
+                return $managerType;
+            }
+        }
+
+        return NodePackageManagerType::NPM; // Default to NPM if no lock file or packageManager field is found
+    }
+
+    private function detectYarn(string $baseUri, ?string $subFolder = null): ?NodePackageManagerType
+    {
+        if (!$this->adapter->fileExists($baseUri, $subFolder, 'yarn.lock')) {
+            return null;
+        }
+
+        if ($this->adapter->fileExists($baseUri, $subFolder, '.yarnrc.yml')) {
+            return NodePackageManagerType::YARN_BERRY;
+        }
+
+        return NodePackageManagerType::YARN;
     }
 
     private function getFileContent(string $baseUri, ?string $subFolder, string $filename): ?string

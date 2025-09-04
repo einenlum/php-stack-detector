@@ -34,7 +34,7 @@ readonly class Detector
         return $this->phpConfigurationDetector->getPhpConfiguration($baseUri, $subFolder);
     }
 
-    private function getNodeConfiguration(string $baseUri, ?string $subFolder = null): NodeConfiguration
+    private function getNodeConfiguration(string $baseUri, ?string $subFolder = null): ?NodeConfiguration
     {
         return $this->nodeConfigurationDetector->getNodeConfiguration($baseUri, $subFolder);
     }

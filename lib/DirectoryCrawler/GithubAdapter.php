@@ -37,6 +37,24 @@ readonly class GithubAdapter implements AdapterInterface
         return base64_decode($content['content']);
     }
 
+    public function fileExists(string $baseUri, ?string ...$pathTree): bool
+    {
+        $config = $this->splitBaseUri($baseUri);
+
+        try {
+            $this->client->repo()->contents()->show(
+                $config['organization'],
+                $config['repository'],
+                $this->getPathTreeAsString($pathTree),
+                $config['reference']
+            );
+
+            return true;
+        } catch (RuntimeException $e) {
+            return false;
+        }
+    }
+
     public function directoryExists(string $baseUri, ?string ...$pathTree): bool
     {
         $config = $this->splitBaseUri($baseUri);
