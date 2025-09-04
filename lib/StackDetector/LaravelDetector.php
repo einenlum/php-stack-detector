@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\StackDetector;
+namespace Fortrabbit\PhpStackDetector\StackDetector;
 
-use Einenlum\PhpStackDetector\DTO\DependencyTree;
-use Einenlum\PhpStackDetector\DTO\Stack;
-use Einenlum\PhpStackDetector\StackDetectorInterface;
-use Einenlum\PhpStackDetector\Enum\StackType;
+use Fortrabbit\PhpStackDetector\DTO\DependencyTree;
+use Fortrabbit\PhpStackDetector\DTO\Stack;
+use Fortrabbit\PhpStackDetector\StackDetectorInterface;
+use Fortrabbit\PhpStackDetector\Enum\StackType;
 
 class LaravelDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {

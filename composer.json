@@ -1,16 +1,16 @@
 {
-    "name": "einenlum/php-stack-detector",
+    "name": "fortrabbit/php-stack-detector",
     "description": "A package to detect the PHP stack of a project",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Einenlum\\PhpStackDetector\\": "lib/"
+            "Fortrabbit\\PhpStackDetector\\": "lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Einenlum\\Tests\\PhpStackDetector\\": "tests/"
+            "Fortrabbit\\Tests\\PhpStackDetector\\": "tests/"
         }
     },
     "authors": [

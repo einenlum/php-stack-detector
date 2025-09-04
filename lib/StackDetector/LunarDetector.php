@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\StackDetector;
+namespace Fortrabbit\PhpStackDetector\StackDetector;
 
-use Einenlum\PhpStackDetector\StackDetectorInterface;
-use Einenlum\PhpStackDetector\Enum\StackType;
+use Fortrabbit\PhpStackDetector\StackDetectorInterface;
+use Fortrabbit\PhpStackDetector\Enum\StackType;
 
 class LunarDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {

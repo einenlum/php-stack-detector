@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Composer;
+namespace Fortrabbit\PhpStackDetector\Composer;
 
-use Einenlum\PhpStackDetector\DTO\Composer\ComposerConfig;
-use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
-use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-use Einenlum\PhpStackDetector\Exception\CacheMissException;
-use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
+use Fortrabbit\PhpStackDetector\DTO\Composer\ComposerConfig;
+use Fortrabbit\PhpStackDetector\DTO\Enum\ComposerConfigType;
+use Fortrabbit\PhpStackDetector\DirectoryCrawler\AdapterInterface;
+use Fortrabbit\PhpStackDetector\Exception\CacheMissException;
+use Fortrabbit\PhpStackDetector\Exception\ResourceNotFoundException;
 
 /**
  * We use an array cache so that we don't make expensive calls to the adapter

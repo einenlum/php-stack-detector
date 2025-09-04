@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DirectoryCrawler;
+namespace Fortrabbit\PhpStackDetector\DirectoryCrawler;
 
-use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
+use Fortrabbit\PhpStackDetector\Exception\ResourceNotFoundException;
 
 class FilesystemAdapter implements AdapterInterface
 {

@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-use Einenlum\PhpStackDetector\Factory\GithubDetectorFactory;
+use Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory;
 use Github\AuthMethod;
 
 $factory = new GithubDetectorFactory();

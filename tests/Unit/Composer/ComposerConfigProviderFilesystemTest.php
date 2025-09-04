@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\Tests\PhpStackDetector\Unit\Composer;
+namespace Fortrabbit\Tests\PhpStackDetector\Unit\Composer;
 
-use Einenlum\PhpStackDetector\DTO\Composer\ComposerConfig;
-use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
-use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
-use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
+use Fortrabbit\PhpStackDetector\DTO\Composer\ComposerConfig;
+use Fortrabbit\PhpStackDetector\Composer\ComposerConfigProvider;
+use Fortrabbit\PhpStackDetector\DTO\Enum\ComposerConfigType;
+use Fortrabbit\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
 
 /**

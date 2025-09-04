@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DTO\Enum;
+namespace Fortrabbit\PhpStackDetector\DTO\Enum;
 
 enum ComposerConfigType: string
 {

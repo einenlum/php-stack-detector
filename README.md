@@ -36,7 +36,7 @@ Detected package managers:
 ## Install
 
 ```
-composer require einenlum/php-stack-detector
+composer require fortrabbit/php-stack-detector
 ```
 
 ## Usage
@@ -46,10 +46,10 @@ composer require einenlum/php-stack-detector
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Einenlum\PhpStackDetector\Detector;
-use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
-use Einenlum\PhpStackDetector\Factory\GithubDetectorFactory;
-use Einenlum\PhpStackDetector\Enum\StackType;
+use Fortrabbit\PhpStackDetector\Detector;
+use Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory;
+use Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory;
+use Fortrabbit\PhpStackDetector\Enum\StackType;
 
 // Local usage
 
@@ -101,10 +101,10 @@ $client = new \Github\Client();
 $client->authenticate('some_access_token', null, \Github\AuthMethod::ACCESS_TOKEN);
 $detector = $factory->create($client);
 
-$config = $detector->getFullConfiguration('einenlum/private-repo');
+$config = $detector->getFullConfiguration('fortrabbit/private-repo');
 
 // optionally: detect the stack on a specific branch 
-$config = $detector->getFullConfiguration('einenlum/private-repo:branch-name');
+$config = $detector->getFullConfiguration('fortrabbit/private-repo:branch-name');
 ```
 
 You can also use the CLI to test it.
@@ -136,7 +136,7 @@ Package Manager: npm
 It is advised to use an access token for github parsing, to either access private repositories or avoid reaching Github API limit.
 
 ```
-GITHUB_ACCESS_TOKEN=my_token php bin/detect-github.php 'einenlum/private-repo'
+GITHUB_ACCESS_TOKEN=my_token php bin/detect-github.php 'fortrabbit/private-repo'
 Detected stack: laravel
 Version: 10.19.0
 
@@ -153,10 +153,10 @@ For Github:
 
 ```yaml
 services:
-    Einenlum\PhpStackDetector\Factory\GithubDetectorFactory: ~
+    Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory: ~
 
-    Einenlum\PhpStackDetector\Detector:
-        factory: ['@Einenlum\PhpStackDetector\Factory\GithubDetectorFactory', 'create']
+    Fortrabbit\PhpStackDetector\Detector:
+        factory: ['@Fortrabbit\PhpStackDetector\Factory\GithubDetectorFactory', 'create']
         arguments:
             $client: '@Github\Client'
 ```
@@ -165,10 +165,10 @@ For local filesystem:
 
 ```yaml
 services:
-    Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory: ~
+    Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory: ~
 
-    Einenlum\PhpStackDetector\Detector:
-        factory: ['@Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory', 'create']
+    Fortrabbit\PhpStackDetector\Detector:
+        factory: ['@Fortrabbit\PhpStackDetector\Factory\FilesystemDetectorFactory', 'create']
 ```
 
 ## Tests

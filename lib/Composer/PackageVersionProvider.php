@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Composer;
+namespace Fortrabbit\PhpStackDetector\Composer;
 
-use Einenlum\PhpStackDetector\DTO\Composer\PackageVersion;
-use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
+use Fortrabbit\PhpStackDetector\DTO\Composer\PackageVersion;
+use Fortrabbit\PhpStackDetector\DTO\Enum\ComposerConfigType;
 
 readonly class PackageVersionProvider
 {

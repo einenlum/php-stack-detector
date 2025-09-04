@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DTO\Composer;
+namespace Fortrabbit\PhpStackDetector\DTO\Composer;
 
-use Einenlum\ComposerVersionParser\Parser;
+use Fortrabbit\ComposerVersionParser\Parser;
 
 readonly class PackageVersion
 {

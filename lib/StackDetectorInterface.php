@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
+namespace Fortrabbit\PhpStackDetector;
 
-use Einenlum\PhpStackDetector\DTO\Stack;
+use Fortrabbit\PhpStackDetector\DTO\Stack;
 
 interface StackDetectorInterface
 {

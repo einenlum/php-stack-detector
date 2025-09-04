@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
+namespace Fortrabbit\PhpStackDetector;
 
-use Einenlum\PhpStackDetector\DTO\FullConfiguration;
-use Einenlum\PhpStackDetector\DTO\NodeConfiguration;
-use Einenlum\PhpStackDetector\DTO\PhpConfiguration;
-use Einenlum\PhpStackDetector\DTO\Stack;
+use Fortrabbit\PhpStackDetector\DTO\FullConfiguration;
+use Fortrabbit\PhpStackDetector\DTO\NodeConfiguration;
+use Fortrabbit\PhpStackDetector\DTO\PhpConfiguration;
+use Fortrabbit\PhpStackDetector\DTO\Stack;
 
 readonly class Detector
 {

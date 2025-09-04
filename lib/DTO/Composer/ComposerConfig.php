@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DTO\Composer;
+namespace Fortrabbit\PhpStackDetector\DTO\Composer;
 
-use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
+use Fortrabbit\PhpStackDetector\DTO\Enum\ComposerConfigType;
 
 readonly class ComposerConfig
 {
