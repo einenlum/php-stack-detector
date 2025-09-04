@@ -4,7 +4,7 @@ namespace Einenlum\PhpStackDetector\StackDetector;
 
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
-use Einenlum\PhpStackDetector\Stack;
+use Einenlum\PhpStackDetector\DTO\Stack;
 use Einenlum\PhpStackDetector\StackDetectorInterface;
 use Einenlum\PhpStackDetector\StackType;
 
