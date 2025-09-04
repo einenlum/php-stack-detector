@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
-
-use Einenlum\PhpStackDetector\DTO\Stack;
+namespace Einenlum\PhpStackDetector\DTO;
 
 readonly class FullConfiguration
 {

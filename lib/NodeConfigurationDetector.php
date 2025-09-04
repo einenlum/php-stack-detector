@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector;
 
+use Einenlum\PhpStackDetector\DTO\NodeConfiguration;
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 

@@ -7,6 +7,8 @@ namespace Einenlum\PhpStackDetector;
 use Einenlum\PhpStackDetector\Composer\ComposerConfig;
 use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
 use Einenlum\PhpStackDetector\Composer\ComposerConfigType;
+use Einenlum\PhpStackDetector\DTO\PhpConfiguration;
+use Einenlum\PhpStackDetector\DTO\PhpVersion;
 
 class PhpConfigurationDetector
 {

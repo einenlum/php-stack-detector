@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
+namespace Einenlum\PhpStackDetector\DTO;
 
 use Einenlum\PhpStackDetector\StackDetector\LunarDetector;
 use Einenlum\PhpStackDetector\StackDetector\OctoberCMSDetector;

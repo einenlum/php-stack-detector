@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
+namespace Einenlum\PhpStackDetector\DTO;
 
-readonly class NodeConfiguration
+readonly class PhpVersion
 {
     public function __construct(
         public ?string $version,
         public ?string $requirements,
-        public NodePackageManagerType $packageManager,
     ) {
     }
 }

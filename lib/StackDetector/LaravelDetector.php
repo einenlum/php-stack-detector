@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\StackDetector;
 
-use Einenlum\PhpStackDetector\DependencyTree;
+use Einenlum\PhpStackDetector\DTO\DependencyTree;
 use Einenlum\PhpStackDetector\DTO\Stack;
 use Einenlum\PhpStackDetector\StackDetectorInterface;
 use Einenlum\PhpStackDetector\StackType;
