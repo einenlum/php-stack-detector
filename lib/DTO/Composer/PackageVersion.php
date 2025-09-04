@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Composer;
+namespace Einenlum\PhpStackDetector\DTO\Composer;
 
 use Einenlum\ComposerVersionParser\Parser;
 

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Einenlum\Tests\PhpStackDetector\Unit\Composer;
 
-use Einenlum\PhpStackDetector\Composer\ComposerConfig;
+use Einenlum\PhpStackDetector\DTO\Composer\ComposerConfig;
 use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
-use Einenlum\PhpStackDetector\Composer\ComposerConfigType;
+use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
 use Einenlum\PhpStackDetector\DirectoryCrawler\FilesystemAdapter;
 use PHPUnit\Framework\TestCase;
 

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Composer;
 
+use Einenlum\PhpStackDetector\DTO\Composer\PackageVersion;
+use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
+
 readonly class PackageVersionProvider
 {
     public function __construct(private ComposerConfigProvider $configProvider)

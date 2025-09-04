@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Composer;
+namespace Einenlum\PhpStackDetector\DTO\Composer;
+
+use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
 
 readonly class ComposerConfig
 {
