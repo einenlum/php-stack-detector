@@ -18,14 +18,15 @@ readonly class PackageVersionProvider
         ?string $subDirectory,
         array $packageNames,
     ): ?PackageVersion {
-        $config = $this->configProvider->getComposerConfig($baseUri, $subDirectory);
-        if (null === $config) {
-            return null;
-        }
+        $lock = $this->configProvider->getComposerConfig(
+            ComposerConfigType::LOCK,
+            $baseUri,
+            $subDirectory
+        );
 
-        if (ComposerConfigType::LOCK === $config->type) {
+        if ($lock) {
             foreach ($packageNames as $packageName) {
-                foreach ($config->content['packages'] as $package) {
+                foreach ($lock->content['packages'] as $package) {
                     if ($package['name'] === $packageName) {
                         return new PackageVersion(
                             null,
@@ -35,6 +36,16 @@ readonly class PackageVersionProvider
                 }
             }
 
+            return null;
+        }
+
+        $config = $this->configProvider->getComposerConfig(
+            ComposerConfigType::JSON,
+            $baseUri,
+            $subDirectory
+        );
+
+        if (null === $config || !isset($config->content['require'])) {
             return null;
         }
 

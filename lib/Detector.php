@@ -7,8 +7,28 @@ namespace Einenlum\PhpStackDetector;
 readonly class Detector
 {
     /** @param StackDetectorInterface[] $stackDetectors */
-    public function __construct(private array $stackDetectors)
+    public function __construct(
+        private PhpConfigurationDetector $phpConfigurationDetector,
+        private array $stackDetectors,
+    ) {
+    }
+
+    public function getFullConfiguration(string $baseUri, ?string $subFolder = null): FullConfiguration
     {
+        $subFolder = $this->cleanSubFolder($subFolder);
+
+        $phpConfiguration = $this->getPhpConfiguration($baseUri, $subFolder);
+        $stack = $this->getStack($baseUri, $subFolder);
+
+        return new FullConfiguration(
+            $phpConfiguration,
+            $stack,
+        );
+    }
+
+    private function getPhpConfiguration(string $baseUri, ?string $subFolder = null): PhpConfiguration
+    {
+        return $this->phpConfigurationDetector->getPhpConfiguration($baseUri, $subFolder);
     }
 
     /**
@@ -19,10 +39,8 @@ readonly class Detector
      *                        or
      *                        symfony/demo:v1.1 for a remote Github repository with a reference
      */
-    public function getStack(string $baseUri, ?string $subFolder = null): ?Stack
+    private function getStack(string $baseUri, ?string $subFolder = null): ?Stack
     {
-        $subFolder = $this->cleanSubFolder($subFolder);
-
         foreach ($this->stackDetectors as $stackDetector) {
             $stack = $stackDetector->getStack($baseUri, $subFolder);
 

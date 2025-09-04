@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\Composer;
 
-enum ComposerConfigType
+enum ComposerConfigType: string
 {
-    case JSON;
-    case LOCK;
+    case JSON = 'json';
+    case LOCK = 'lock';
 }

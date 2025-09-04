@@ -4,11 +4,24 @@ This library allows to easily detect the PHP stack (Wordpress, Laravel, Symfonyâ
 
 Supported Stacks for now:
 
-- Wordpress
-- Laravel
-- Symfony
-- Statamic
+- Bolt CMS
+- Cakephp
+- Codeigniter
 - Craft CMS
+- Drupal
+- Grav CMS
+- Laravel
+- Leaf PHP
+- Lunar
+- October CMS
+- Shopware
+- Statamic
+- Symfony
+- Tempest
+- Twill
+- Typo3 CMS
+- Winter CMS
+- Wordpress
 
 ## Install
 
@@ -32,7 +45,17 @@ use Einenlum\PhpStackDetector\StackType;
 
 $factory = new FilesystemDetectorFactory();
 $detector = $factory->create();
-$stack = $detector->getStack('/path/to/a/symfony/directory');
+$config = $detector->getFullConfiguration('/path/to/a/symfony/directory');
+
+$phpConfiguration = $config->phpConfiguration;
+
+// value from config platform php
+$phpConfiguration->phpVersion->version; // 8.3
+// value from require php
+$phpConfiguration->phpVersion->requirements; // ^7.2|^8.0
+$phpConfiguration->requiredExtensions; // ['intl', 'curl']
+
+$stack = $config->stack;
 
 $stack->type === StackType::SYMFONY;
 $stack->version; // 5.4
@@ -49,7 +72,16 @@ $stack; // null
 $factory = new GithubDetectorFactory();
 $detector = $factory->create();
 
-$stack = $detector->getStack('symfony/demo');
+$config = $detector->getFullConfiguration('/path/to/a/symfony/directory');
+
+$phpConfiguration = $config->phpConfiguration;
+// value from config platform php
+$phpConfiguration->phpVersion->version; // 8.3
+// value from require php
+$phpConfiguration->phpVersion->requirements; // ^7.2|^8.0
+$phpConfiguration->requiredExtensions; // ['intl', 'curl']
+
+$stack = $config->stack;
 
 $stack->type === StackType::SYMFONY;
 $stack->version; // 6.3.0
@@ -59,13 +91,10 @@ $client = new \Github\Client();
 $client->authenticate('some_access_token', null, \Github\AuthMethod::ACCESS_TOKEN);
 $detector = $factory->create($client);
 
-$stack = $detector->getStack('einenlum/private-repo');
+$config = $detector->getFullConfiguration('einenlum/private-repo');
 
 // optionally: detect the stack on a specific branch 
-$stack = $detector->getStack('einenlum/private-repo:branch-name');
-
-$stack->type === StackType::SYMFONY;
-$stack->version; // 6.3.0
+$config = $detector->getFullConfiguration('einenlum/private-repo:branch-name');
 ```
 
 You can also use the CLI to test it.
