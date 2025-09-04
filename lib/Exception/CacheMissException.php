@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Exception;
+namespace fortrabbit\StackDetector\Exception;
 
 class CacheMissException extends \RuntimeException
 {

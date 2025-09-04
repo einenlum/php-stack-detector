@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DirectoryCrawler;
+namespace fortrabbit\StackDetector\DirectoryCrawler;
 
-use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
+use fortrabbit\StackDetector\Exception\ResourceNotFoundException;
 
 interface AdapterInterface
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
+namespace fortrabbit\StackDetector;
 
-use Einenlum\PhpStackDetector\DTO\Composer\ComposerConfig;
-use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
-use Einenlum\PhpStackDetector\DTO\Enum\ComposerConfigType;
-use Einenlum\PhpStackDetector\DTO\PhpConfiguration;
-use Einenlum\PhpStackDetector\DTO\PhpVersion;
+use fortrabbit\StackDetector\DTO\Composer\ComposerConfig;
+use fortrabbit\StackDetector\Composer\ComposerConfigProvider;
+use fortrabbit\StackDetector\DTO\Enum\ComposerConfigType;
+use fortrabbit\StackDetector\DTO\PhpConfiguration;
+use fortrabbit\StackDetector\DTO\PhpVersion;
 
 class PhpConfigurationDetector
 {

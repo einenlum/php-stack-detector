@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DTO;
+namespace fortrabbit\StackDetector\DTO;
 
-use Einenlum\PhpStackDetector\Enum\StackType;
+use fortrabbit\StackDetector\Enum\StackType;
 
 readonly class Stack
 {

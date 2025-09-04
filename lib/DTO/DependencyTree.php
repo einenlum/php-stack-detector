@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DTO;
+namespace fortrabbit\StackDetector\DTO;
 
-use Einenlum\PhpStackDetector\StackDetector\LunarDetector;
-use Einenlum\PhpStackDetector\StackDetector\OctoberCMSDetector;
-use Einenlum\PhpStackDetector\StackDetector\StatamicDetector;
-use Einenlum\PhpStackDetector\StackDetector\TwillDetector;
-use Einenlum\PhpStackDetector\StackDetector\WinterCMSDetector;
+use fortrabbit\StackDetector\StackDetector\LunarDetector;
+use fortrabbit\StackDetector\StackDetector\OctoberCMSDetector;
+use fortrabbit\StackDetector\StackDetector\StatamicDetector;
+use fortrabbit\StackDetector\StackDetector\TwillDetector;
+use fortrabbit\StackDetector\StackDetector\WinterCMSDetector;
 
 class DependencyTree
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\DTO;
+namespace fortrabbit\StackDetector\DTO;
 
-use Einenlum\PhpStackDetector\Enum\NodePackageManagerType;
+use fortrabbit\StackDetector\Enum\NodePackageManagerType;
 
 readonly class NodeConfiguration
 {

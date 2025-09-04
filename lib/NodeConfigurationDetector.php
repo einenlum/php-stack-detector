@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector;
+namespace fortrabbit\StackDetector;
 
-use Einenlum\PhpStackDetector\DTO\NodeConfiguration;
-use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-use Einenlum\PhpStackDetector\Enum\NodePackageManagerType;
-use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
-use Einenlum\PhpStackDetector\Node\PackageJsonProvider;
+use fortrabbit\StackDetector\DTO\NodeConfiguration;
+use fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use fortrabbit\StackDetector\Enum\NodePackageManagerType;
+use fortrabbit\StackDetector\Exception\ResourceNotFoundException;
+use fortrabbit\StackDetector\Node\PackageJsonProvider;
 
 class NodeConfigurationDetector
 {

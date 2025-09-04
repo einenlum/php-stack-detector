@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Enum;
+namespace fortrabbit\StackDetector\Enum;
 
 enum StackType: string
 {

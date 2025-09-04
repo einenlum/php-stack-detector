@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Factory;
+namespace fortrabbit\StackDetector\Factory;
 
-use Einenlum\PhpStackDetector\Composer\ComposerConfigProvider;
-use Einenlum\PhpStackDetector\Composer\PackageVersionProvider;
-use Einenlum\PhpStackDetector\StackDetector\BoltCMSDetector;
-use Einenlum\PhpStackDetector\StackDetector\CakePhpDetector;
-use Einenlum\PhpStackDetector\StackDetector\CodeigniterDetector;
-use Einenlum\PhpStackDetector\StackDetector\DrupalDetector;
-use Einenlum\PhpStackDetector\StackDetector\GravCMSDetector;
-use Einenlum\PhpStackDetector\StackDetector\LeafDetector;
-use Einenlum\PhpStackDetector\StackDetector\LunarDetector;
-use Einenlum\PhpStackDetector\StackDetector\OctoberCMSDetector;
-use Einenlum\PhpStackDetector\StackDetector\ShopwareDetector;
-use Einenlum\PhpStackDetector\StackDetector\TempestDetector;
-use Einenlum\PhpStackDetector\StackDetector\TwillDetector;
-use Einenlum\PhpStackDetector\StackDetector\Typo3Detector;
-use Einenlum\PhpStackDetector\StackDetector\WinterCMSDetector;
-use Einenlum\PhpStackDetector\StackDetectorInterface;
-use Einenlum\PhpStackDetector\StackDetector\CraftCMSDetector;
-use Einenlum\PhpStackDetector\StackDetector\LaravelDetector;
-use Einenlum\PhpStackDetector\StackDetector\StatamicDetector;
-use Einenlum\PhpStackDetector\StackDetector\SymfonyDetector;
-use Einenlum\PhpStackDetector\StackDetector\WordpressDetector;
-use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
+use fortrabbit\StackDetector\Composer\ComposerConfigProvider;
+use fortrabbit\StackDetector\Composer\PackageVersionProvider;
+use fortrabbit\StackDetector\StackDetector\BoltCMSDetector;
+use fortrabbit\StackDetector\StackDetector\CakePhpDetector;
+use fortrabbit\StackDetector\StackDetector\CodeigniterDetector;
+use fortrabbit\StackDetector\StackDetector\DrupalDetector;
+use fortrabbit\StackDetector\StackDetector\GravCMSDetector;
+use fortrabbit\StackDetector\StackDetector\LeafDetector;
+use fortrabbit\StackDetector\StackDetector\LunarDetector;
+use fortrabbit\StackDetector\StackDetector\OctoberCMSDetector;
+use fortrabbit\StackDetector\StackDetector\ShopwareDetector;
+use fortrabbit\StackDetector\StackDetector\TempestDetector;
+use fortrabbit\StackDetector\StackDetector\TwillDetector;
+use fortrabbit\StackDetector\StackDetector\Typo3Detector;
+use fortrabbit\StackDetector\StackDetector\WinterCMSDetector;
+use fortrabbit\StackDetector\StackDetectorInterface;
+use fortrabbit\StackDetector\StackDetector\CraftCMSDetector;
+use fortrabbit\StackDetector\StackDetector\LaravelDetector;
+use fortrabbit\StackDetector\StackDetector\StatamicDetector;
+use fortrabbit\StackDetector\StackDetector\SymfonyDetector;
+use fortrabbit\StackDetector\StackDetector\WordpressDetector;
+use fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
 
 trait HasStackDetectors
 {

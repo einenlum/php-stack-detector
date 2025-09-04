@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\Node;
+namespace fortrabbit\StackDetector\Node;
 
-use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
-use Einenlum\PhpStackDetector\Exception\CacheMissException;
-use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
+use fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use fortrabbit\StackDetector\Exception\CacheMissException;
+use fortrabbit\StackDetector\Exception\ResourceNotFoundException;
 
 class PackageJsonProvider
 {

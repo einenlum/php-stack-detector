@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Einenlum\PhpStackDetector\StackDetector;
+namespace fortrabbit\StackDetector\StackDetector;
 
-use Einenlum\PhpStackDetector\StackDetectorInterface;
-use Einenlum\PhpStackDetector\Enum\StackType;
+use fortrabbit\StackDetector\StackDetectorInterface;
+use fortrabbit\StackDetector\Enum\StackType;
 
 class OctoberCMSDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {
