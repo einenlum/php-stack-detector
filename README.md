@@ -107,12 +107,20 @@ Required extensions: ctype, iconv, redis, sodium
 Detected stack: laravel
 Version: 10.19.0
 
+Detected Node.js version: 22.0
+Detected Node.js requirements: Unknown version
+Package Manager: bun
+
 php bin/detect-github.php 'symfony/demo'
 Detected PHP version: 8.4
 Detected PHP requirements: ^8.3
 Required extensions: ctype, iconv
 Detected stack: symfony
 Version: 6.3.0
+
+Detected Node.js version: Unknown version
+Detected Node.js requirements: Unknown version
+Package Manager: npm
 ```
 
 It is advised to use an access token for github parsing, to either access private repositories or avoid reaching Github API limit.
@@ -121,6 +129,10 @@ It is advised to use an access token for github parsing, to either access privat
 GITHUB_ACCESS_TOKEN=my_token php bin/detect-github.php 'einenlum/private-repo'
 Detected stack: laravel
 Version: 10.19.0
+
+Detected Node.js version: Unknown version
+Detected Node.js requirements: Unknown version
+Package Manager: npm
 ```
 
 ### Usage with Symfony

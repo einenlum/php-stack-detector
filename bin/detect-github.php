@@ -40,3 +40,10 @@ if (null === $stack) {
 
 echo 'Detected stack: '.$stack->type->value."\n";
 echo 'Version: '.($stack->version ?: 'Unknown version')."\n";
+
+$nodeConfig = $config->nodeConfiguration;
+
+echo "\n";
+echo 'Detected Node.js version: '.($nodeConfig?->version ?: 'Unknown version')."\n";
+echo 'Detected Node.js requirements: '.($nodeConfig?->requirements ?: 'Unknown version')."\n";
+echo 'Package Manager: '.($nodeConfig?->packageManager?->value ?: 'Unknown')."\n";
