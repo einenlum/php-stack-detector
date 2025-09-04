@@ -19,6 +19,7 @@ class NodeConfigurationDetector
     ): ?NodeConfiguration {
         return new NodeConfiguration(
             $this->getNodeVersion($baseUri, $subFolder),
+            $this->getVersionRequirements($baseUri, $subFolder),
             null,
         );
     }
@@ -48,6 +49,23 @@ class NodeConfigurationDetector
         $nodeVersion = $this->extractNodeVersion($nodeVersionContent);
 
         return $nodeVersion;
+    }
+
+    private function getVersionRequirements(string $baseUri, ?string $subFolder = null): ?string
+    {
+        $packageJsonContent = $this->getFileContent(
+            $baseUri,
+            $subFolder,
+            'package.json'
+        );
+
+        if (null === $packageJsonContent) {
+            return null;
+        }
+
+        $packageData = json_decode($packageJsonContent, true, 512, \JSON_THROW_ON_ERROR);
+
+        return $packageData['engines']['node'] ?? null;
     }
 
     private function extractNodeVersion(?string $content): ?string

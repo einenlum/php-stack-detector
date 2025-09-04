@@ -96,6 +96,21 @@ class DetectorTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_detects_requirements_from_package_json(): void
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/package-json-requirements')
+        );
+
+        $this->assertNotNull($fullConfig);
+
+        $this->assertNotNull($fullConfig->nodeConfiguration);
+        $this->assertSame('>=18 <20', $fullConfig->nodeConfiguration->requirements);
+    }
+
+    /**
+     * @test
      *
      * @dataProvider packagesDataProvider
      */

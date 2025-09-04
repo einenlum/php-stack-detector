@@ -8,6 +8,7 @@ class NodeConfiguration
 {
     public function __construct(
         public readonly ?string $version,
+        public readonly ?string $requirements,
         public readonly ?string $packageManager,
     ) {
     }
