@@ -22,6 +22,7 @@ readonly class Detector
 
         return new FullConfiguration(
             $phpConfiguration,
+            null,
             $stack,
         );
     }
