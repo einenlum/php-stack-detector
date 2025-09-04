@@ -23,6 +23,16 @@ Supported Stacks for now:
 - Winter CMS
 - Wordpress
 
+It also detects if the repository uses nodeJS. If so, it detects node version (through .nvmrc or .node-version), node version requirements, and package manager.
+
+Detected package managers:
+
+- npm
+- pnpm
+- bun
+- yarn
+- yarn berry
+
 ## Install
 
 ```
