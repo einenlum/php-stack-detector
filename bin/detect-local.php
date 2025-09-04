@@ -19,6 +19,7 @@ $config = $detector->getFullConfiguration($directory, $subDirectory);
 
 $phpConfig = $config->phpConfiguration;
 echo 'Detected PHP version: '.($phpConfig->phpVersion?->version ?: 'Unknown version')."\n";
+echo 'Detected PHP requirements: '.($phpConfig->phpVersion?->requirements ?: 'Unknown version')."\n";
 echo 'Required extensions: '.(empty($phpConfig->requiredExtensions) ? 'None' : implode(', ', $phpConfig->requiredExtensions))."\n";
 
 $stack = $config->stack;

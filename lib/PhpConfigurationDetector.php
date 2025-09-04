@@ -36,14 +36,21 @@ class PhpConfigurationDetector
     {
         $content = $config->content;
         if (isset($content['config']['platform']['php'])) {
-            return new PhpVersion($content['config']['platform']['php'], null);
+            $configPlatformVersion = $content['config']['platform']['php'];
         }
 
         if (isset($content['require']['php'])) {
-            return new PhpVersion(null, $content['require']['php']);
+            $phpVersionRequirements = $content['require']['php'];
         }
 
-        return null;
+        if (!isset($configPlatformVersion) && !isset($phpVersionRequirements)) {
+            return null;
+        }
+
+        return new PhpVersion(
+            $configPlatformVersion ?? null,
+            $phpVersionRequirements ?? null
+        );
     }
 
     /** @return string[] */

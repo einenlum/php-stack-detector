@@ -8,7 +8,7 @@ readonly class PhpVersion
 {
     public function __construct(
         public ?string $version,
-        public ?string $requirement,
+        public ?string $requirements,
     ) {
     }
 }

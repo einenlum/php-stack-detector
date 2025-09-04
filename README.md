@@ -35,7 +35,11 @@ $detector = $factory->create();
 $config = $detector->getFullConfiguration('/path/to/a/symfony/directory');
 
 $phpConfiguration = $config->phpConfiguration;
+
+// value from config platform php
 $phpConfiguration->phpVersion->version; // 8.3
+// value from require php
+$phpConfiguration->phpVersion->requirements; // ^7.2|^8.0
 $phpConfiguration->requiredExtensions; // ['intl', 'curl']
 
 $stack = $config->stack;
@@ -58,7 +62,10 @@ $detector = $factory->create();
 $config = $detector->getFullConfiguration('/path/to/a/symfony/directory');
 
 $phpConfiguration = $config->phpConfiguration;
+// value from config platform php
 $phpConfiguration->phpVersion->version; // 8.3
+// value from require php
+$phpConfiguration->phpVersion->requirements; // ^7.2|^8.0
 $phpConfiguration->requiredExtensions; // ['intl', 'curl']
 
 $stack = $config->stack;
