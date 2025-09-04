@@ -6,6 +6,7 @@ namespace Einenlum\PhpStackDetector;
 
 use Einenlum\PhpStackDetector\DTO\NodeConfiguration;
 use Einenlum\PhpStackDetector\DirectoryCrawler\AdapterInterface;
+use Einenlum\PhpStackDetector\Enum\NodePackageManagerType;
 use Einenlum\PhpStackDetector\Exception\ResourceNotFoundException;
 
 class NodeConfigurationDetector

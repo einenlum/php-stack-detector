@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Einenlum\PhpStackDetector\DTO;
 
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 
 readonly class Stack
 {

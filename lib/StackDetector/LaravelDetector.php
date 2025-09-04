@@ -7,7 +7,7 @@ namespace Einenlum\PhpStackDetector\StackDetector;
 use Einenlum\PhpStackDetector\DTO\DependencyTree;
 use Einenlum\PhpStackDetector\DTO\Stack;
 use Einenlum\PhpStackDetector\StackDetectorInterface;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 
 class LaravelDetector extends BaseComposerTypeDetector implements StackDetectorInterface
 {

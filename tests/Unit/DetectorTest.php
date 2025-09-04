@@ -6,8 +6,8 @@ namespace Einenlum\Tests\PhpStackDetector\Unit;
 
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
-use Einenlum\PhpStackDetector\NodePackageManagerType;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\NodePackageManagerType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 use PHPUnit\Framework\TestCase;
 
 class DetectorTest extends TestCase

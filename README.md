@@ -39,7 +39,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Einenlum\PhpStackDetector\Detector;
 use Einenlum\PhpStackDetector\Factory\FilesystemDetectorFactory;
 use Einenlum\PhpStackDetector\Factory\GithubDetectorFactory;
-use Einenlum\PhpStackDetector\StackType;
+use Einenlum\PhpStackDetector\Enum\StackType;
 
 // Local usage
 
