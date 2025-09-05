@@ -124,6 +124,34 @@ class DetectorTest extends TestCase
         $this->assertNull($fullConfig->nodeConfiguration);
     }
 
+    /** @test */
+    public function it_returns_package_json_content_if_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'node-configuration/full-package-json')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertIsArray($fullConfig->nodeConfiguration->packageJsonContent);
+        $this->assertCount(6, array_keys($fullConfig->nodeConfiguration->packageJsonContent));
+        $this->assertSame(
+            [
+                'private',
+                'type',
+                'scripts',
+                'dependencies',
+                'optionalDependencies',
+                'devDependencies',
+            ],
+            array_keys($fullConfig->nodeConfiguration->packageJsonContent)
+        );
+
+        $this->assertCount(
+            8,
+            $fullConfig->nodeConfiguration->packageJsonContent['dependencies']
+        );
+    }
+
     /**
      * @test
      */

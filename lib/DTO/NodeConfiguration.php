@@ -12,6 +12,8 @@ readonly class NodeConfiguration
         public ?string $version,
         public ?string $requirements,
         public NodePackageManagerType $packageManager,
+        /** @var array<string, mixed> */
+        public array $packageJsonContent,
     ) {
     }
 }
