@@ -66,14 +66,11 @@ class NodeConfigurationDetector
 
     private function getVersionRequirements(string $baseUri, ?string $subFolder = null): ?string
     {
+        /** @var array<array, mixed> $packageJsonContent */
         $packageJsonContent = $this->packageJsonProvider->getPackageJsonConfig(
             $baseUri,
             $subFolder,
         );
-
-        if (null === $packageJsonContent) {
-            return null;
-        }
 
         return $packageJsonContent['engines']['node'] ?? null;
     }
@@ -122,21 +119,13 @@ class NodeConfigurationDetector
             return $yarnType;
         }
 
-        /** @var string $packageJsonContent */
-        $packageJsonContent = $this->getFileContent(
+        /** @var array<array, mixed> $packageJsonContent */
+        $packageJsonContent = $this->packageJsonProvider->getPackageJsonConfig(
             $baseUri,
             $subFolder,
-            'package.json'
         );
 
-        $packageData = json_decode(
-            $packageJsonContent,
-            true,
-            512,
-            \JSON_THROW_ON_ERROR
-        );
-
-        $packageManager = $packageData['packageManager'] ?? null;
+        $packageManager = $packageJsonContent['packageManager'] ?? null;
         if (null !== $packageManager) {
             $packageManagerParts = explode('@', $packageManager);
             $managerName = $packageManagerParts[0];
