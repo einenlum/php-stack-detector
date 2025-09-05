@@ -2,6 +2,8 @@
 
 This library allows to easily detect the PHP stack (Wordpress, Laravel, Symfony…) and the version used, when parsing a directory or ar Github remote repository.
 
+The library is still in an early stage and subject to changes, but it follows SemVer. As long as you stick to a major version, you should be safe.
+
 Supported Stacks for now:
 
 - Bolt CMS
