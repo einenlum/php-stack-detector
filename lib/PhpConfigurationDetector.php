@@ -18,20 +18,31 @@ class PhpConfigurationDetector
 
     public function getPhpConfiguration(string $baseUri, ?string $subFolder = null): PhpConfiguration
     {
-        $composerConfig = $this->composerConfigProvider->getComposerConfig(
+        $composerJsonConfig = $this->composerConfigProvider->getComposerConfig(
             ComposerConfigType::JSON,
             $baseUri,
             $subFolder
         );
 
-        if (null === $composerConfig) {
-            return new PhpConfiguration(null, []);
+        if (null === $composerJsonConfig) {
+            return new PhpConfiguration(null, [], null, null);
         }
 
-        $phpVersion = $this->getPhpVersion($composerConfig);
-        $requiredExtensions = $this->getRequiredExtensions($composerConfig);
+        $phpVersion = $this->getPhpVersion($composerJsonConfig);
+        $requiredExtensions = $this->getRequiredExtensions($composerJsonConfig);
 
-        return new PhpConfiguration($phpVersion, $requiredExtensions);
+        $composerLockConfig = $this->composerConfigProvider->getComposerConfig(
+            ComposerConfigType::LOCK,
+            $baseUri,
+            $subFolder
+        );
+
+        return new PhpConfiguration(
+            $phpVersion,
+            $requiredExtensions,
+            $composerJsonConfig->content,
+            $composerLockConfig?->content
+        );
     }
 
     private function getPhpVersion(ComposerConfig $config): ?PhpVersion

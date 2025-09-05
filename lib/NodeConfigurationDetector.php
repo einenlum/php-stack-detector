@@ -34,6 +34,7 @@ class NodeConfigurationDetector
             $this->getNodeVersion($baseUri, $subFolder),
             $this->getVersionRequirements($baseUri, $subFolder),
             $this->getPackageManagerType($baseUri, $subFolder),
+            $packageJsonConfig,
         );
     }
 
