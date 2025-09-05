@@ -334,6 +334,95 @@ class DetectorTest extends TestCase
         $this->assertSame([], $fullConfig->phpConfiguration->requiredExtensions);
     }
 
+    /** @test */
+    public function it_returns_null_if_no_composer_json_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/no-composer-config')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertNull($fullConfig->phpConfiguration->composerJsonContent);
+    }
+
+    /** @test */
+    public function it_returns_composer_json_content_if_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'composer-config/composer-json')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertIsArray($fullConfig->phpConfiguration->composerJsonContent);
+        $this->assertCount(13, array_keys($fullConfig->phpConfiguration->composerJsonContent));
+        $this->assertSame(
+            [
+                'type',
+                'license',
+                'minimum-stability',
+                'prefer-stable',
+                'require',
+                'require-dev',
+                'config',
+                'autoload',
+                'autoload-dev',
+                'replace',
+                'scripts',
+                'conflict',
+                'extra',
+            ],
+            array_keys($fullConfig->phpConfiguration->composerJsonContent)
+        );
+    }
+
+    /** @test */
+    public function it_returns_null_if_no_composer_lock_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'php-config/detector/no-composer-config')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertNull($fullConfig->phpConfiguration->composerLockContent);
+    }
+
+    /** @test */
+    public function it_returns_composer_lock_content_if_both_composer_config_files_are_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'composer-config/composer-both')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertIsArray($fullConfig->phpConfiguration->composerLockContent);
+        $this->assertCount(11, array_keys($fullConfig->phpConfiguration->composerLockContent));
+        $this->assertSame(
+            [
+                '_readme',
+                'content-hash',
+                'packages',
+                'aliases',
+                'minimum-stability',
+                'stability-flags',
+                'prefer-stable',
+                'prefer-lowest',
+                'platform',
+                'platform-dev',
+                'plugin-api-version',
+            ],
+            array_keys($fullConfig->phpConfiguration->composerLockContent)
+        );
+
+        $this->assertCount(
+            3,
+            $fullConfig->phpConfiguration->composerLockContent['packages']
+        );
+    }
+
     public static function packagesDataProvider(): array
     {
         return [
