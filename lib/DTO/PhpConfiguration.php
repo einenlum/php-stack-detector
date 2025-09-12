@@ -16,4 +16,21 @@ readonly class PhpConfiguration
         public ?array $composerLockContent = null,
     ) {
     }
+
+    /** @return array<string, string> */
+    public function getExactInstalledDependencies(): array
+    {
+        if (null === $this->composerLockContent || !isset($this->composerLockContent['packages'])) {
+            return [];
+        }
+
+        $dependencies = [];
+        foreach ($this->composerLockContent['packages'] as $package) {
+            if (isset($package['name'], $package['version'])) {
+                $dependencies[$package['name']] = $package['version'];
+            }
+        }
+
+        return $dependencies;
+    }
 }
