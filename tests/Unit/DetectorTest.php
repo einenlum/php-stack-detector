@@ -451,6 +451,50 @@ class DetectorTest extends TestCase
         );
     }
 
+    /** @test */
+    public function it_returns_no_exact_installed_dependencies_if_no_composer_lock_is_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'composer-config/composer-json')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertIsArray(
+            $fullConfig->phpConfiguration->getExactInstalledDependencies()
+        );
+        $this->assertCount(
+            0,
+            $fullConfig->phpConfiguration->getExactInstalledDependencies()
+        );
+    }
+
+    /** @test */
+    public function it_returns_exact_installed_dependencies_if_composer_lock_is_found()
+    {
+        $fullConfig = $this->sut->getFullConfiguration(
+            sprintf('%s/../fixtures/%s', __DIR__, 'composer-config/composer-both')
+        );
+
+        $this->assertNotNull($fullConfig);
+        $this->assertNotNull($fullConfig->phpConfiguration);
+        $this->assertIsArray(
+            $fullConfig->phpConfiguration->getExactInstalledDependencies()
+        );
+        $this->assertCount(
+            3,
+            $fullConfig->phpConfiguration->getExactInstalledDependencies()
+        );
+        $this->assertSame(
+            [
+                'someframework/foo' => 'v2.4.1',
+                'symfony/config' => 'v6.3.2',
+                'symfony/framework-bundle' => 'v6.3.5',
+            ],
+            $fullConfig->phpConfiguration->getExactInstalledDependencies()
+        );
+    }
+
     public static function packagesDataProvider(): array
     {
         return [
