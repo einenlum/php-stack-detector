@@ -524,6 +524,8 @@ class DetectorTest extends TestCase
 
             'Grav CMS 2' => ['grav_cms/2', '2', StackType::GRAV_CMS],
 
+            'Kirby CMS 5' => ['kirby_cms/5', '5', StackType::KIRBY_CMS],
+
             'Leaf 3' => ['leaf/3', '3', StackType::LEAF_PHP],
 
             'Lunar 1' => ['lunar/1', '1', StackType::LUNAR],

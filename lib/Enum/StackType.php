@@ -12,6 +12,7 @@ enum StackType: string
     case CRAFT_CMS = 'craft-cms';
     case DRUPAL = 'drupal';
     case GRAV_CMS = 'grav-cms';
+    case KIRBY_CMS = 'kirby-cms';
     case LARAVEL = 'laravel';
     case LEAF_PHP = 'leaf';
     case LUNAR = 'lunar';

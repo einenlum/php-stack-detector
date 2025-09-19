@@ -12,6 +12,7 @@ Supported Stacks for now:
 - Craft CMS
 - Drupal
 - Grav CMS
+- Kirby CMS
 - Laravel
 - Leaf PHP
 - Lunar

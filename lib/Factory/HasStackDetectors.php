@@ -26,6 +26,7 @@ use fortrabbit\StackDetector\StackDetector\StatamicDetector;
 use fortrabbit\StackDetector\StackDetector\SymfonyDetector;
 use fortrabbit\StackDetector\StackDetector\WordpressDetector;
 use fortrabbit\StackDetector\DirectoryCrawler\AdapterInterface;
+use fortrabbit\StackDetector\StackDetector\KirbyCMSDetector;
 
 trait HasStackDetectors
 {
@@ -47,6 +48,7 @@ trait HasStackDetectors
             new CakePhpDetector($packageVersionProvider),
             new CodeigniterDetector($packageVersionProvider),
             new DrupalDetector($packageVersionProvider),
+            new KirbyCMSDetector($packageVersionProvider),
             new GravCMSDetector($packageVersionProvider),
             new LeafDetector($packageVersionProvider),
             new LunarDetector($packageVersionProvider),
